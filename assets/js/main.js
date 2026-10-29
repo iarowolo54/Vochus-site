@@ -118,34 +118,16 @@
     }
   }
 
-  /* ---- How it works: draw the cycle path once (§4.3) ---- */
-  var path = $('.path');
-  if (path && !reduce.matches && 'IntersectionObserver' in window) {
-    var svgNS = 'http://www.w3.org/2000/svg';
-    var build = function (animate) {
-      var old = $('.path-svg', path); if (old) old.remove();
-      if (matchMedia('(max-width: 599px)').matches) { path.classList.remove('has-svg'); return; }
-      var box = path.getBoundingClientRect(), nodes = $$('.node', path);
-      if (nodes.length < 2) return;
-      var pts = nodes.map(function (n) { var r = n.getBoundingClientRect(); return [r.left - box.left + r.width / 2, r.top - box.top + r.height / 2]; });
-      var y = pts[0][1], x0 = -20, x1 = box.width, yb = box.height + 32, R = 16;
-      var svg = d.createElementNS(svgNS, 'svg'); svg.setAttribute('class', 'path-svg'); svg.setAttribute('aria-hidden', 'true');
-      svg.setAttribute('viewBox', '0 0 ' + box.width + ' ' + box.height);
-      var solid = d.createElementNS(svgNS, 'path'); solid.setAttribute('d', 'M' + x0 + ' ' + y + 'H' + x1);
-      var loop = d.createElementNS(svgNS, 'path'); loop.setAttribute('class', 'dash');
-      loop.setAttribute('d', 'M' + x1 + ' ' + y + 'V' + (yb - R) + 'Q' + x1 + ' ' + yb + ' ' + (x1 - R) + ' ' + yb + 'H' + (x0 + R) + 'Q' + x0 + ' ' + yb + ' ' + x0 + ' ' + (yb - R) + 'V' + y);
-      svg.appendChild(solid); svg.appendChild(loop); path.appendChild(svg); path.classList.add('has-svg');
-      if (!animate) return;
-      var len = solid.getTotalLength();
-      solid.style.strokeDasharray = len; solid.style.strokeDashoffset = len; loop.style.opacity = '0';
-      solid.animate([{ strokeDashoffset: len }, { strokeDashoffset: 0 }], { duration: 600, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'forwards' });
-      loop.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, delay: 500, fill: 'forwards' });
-    };
-    var io = new IntersectionObserver(function (es) {
-      if (es.some(function (e) { return e.isIntersecting; })) { io.disconnect(); build(true); }
-    }, { threshold: 0.4 });
-    io.observe(path);
-    var t; addEventListener('resize', function () { clearTimeout(t); t = setTimeout(function () { if ($('.path-svg', path) || path.classList.contains('has-svg')) build(false); }, 150); });
+  /* ---- How it works: if the step cards start below the fold, reveal their vignette rows once they scroll in ---- */
+  var steps = $('.steps');
+  if (steps && 'IntersectionObserver' in window && !reduce.matches && steps.getBoundingClientRect().top > innerHeight) {
+    steps.classList.add('will-reveal');
+    var reveal = function () { steps.classList.add('is-visible'); so.disconnect(); };
+    var so = new IntersectionObserver(function (es) {
+      if (es.some(function (e) { return e.isIntersecting; })) reveal();
+    }, { threshold: 0.1 });
+    so.observe(steps);
+    setTimeout(reveal, 4000);   /* never leave content hidden if the observer does not fire */
   }
 
   /* ---- FAQ filter (used on faq.html) ---- */
