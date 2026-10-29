@@ -266,6 +266,7 @@ body.menu-open{overflow:hidden}
 /* ---------- 12. How it works: step cards with product vignettes ---------- */
 .steps{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:var(--g)}
 .step-card{display:flex;flex-direction:column;padding:var(--s-5)}
+@supports (grid-template-rows:subgrid){@media (min-width:900px){.steps{grid-template-rows:auto 1fr auto auto;row-gap:0}.step-card{display:grid;grid-row:span 4;grid-template-rows:subgrid;align-content:start}.step-card .mini{align-self:stretch}}}
 .step-n{font:800 40px/1 var(--font-display);letter-spacing:-.04em;color:var(--ink-3);font-variant-numeric:tabular-nums}
 .step-card .mini{margin-top:var(--s-4)}
 .step-card h3{margin-top:var(--s-5)}
@@ -280,12 +281,13 @@ body.menu-open{overflow:hidden}
 .mini-list li{display:flex;align-items:center;gap:10px;min-height:36px;padding:0 12px;background:var(--surface);border-radius:var(--r-sm);font-size:15px;color:var(--ink)}
 .mini-list li .ico{width:16px;height:16px;stroke-width:2.25;color:var(--ink-green)}
 .mini-list li .amt{margin-left:auto;font-weight:500;font-variant-numeric:tabular-nums}
+.mini-list li .when{color:var(--ink-2);font-size:14px;font-variant-numeric:tabular-nums;margin-right:-2px}
 .mini .receipt{margin-top:var(--s-2)}
 .mini .rc-row{min-height:36px;padding:6px 0}
 .mini .rc-row.total{padding-top:var(--s-3)}
 .mini .rc-row.total dd{font-size:22px}
 .mini [data-i]:nth-child(2){--d:1}.mini [data-i]:nth-child(3){--d:2}
-.cycle-return{display:flex;align-items:center;gap:var(--s-3);margin-top:var(--s-5);color:var(--ink-2);font-size:15px;font-weight:500}
+.cycle-return{display:flex;align-items:center;gap:var(--s-3);margin-top:var(--s-5);max-width:none;color:var(--ink-2);font-size:15px;font-weight:500}
 .cycle-return::before,.cycle-return::after{content:"";flex:1;height:1px;background:var(--line-strong)}
 .cycle-return .ico{width:18px;height:18px;color:var(--ink-green)}
 /* staggered reveal, JS + motion-OK only; without JS or with reduced motion everything is simply there */
