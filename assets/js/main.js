@@ -147,6 +147,23 @@
     setTimeout(reveal, 4000);   /* never leave content hidden if the observer does not fire */
   }
 
+
+  /* ---- Mail forms (agent application, contact): the form's own action is a mailto:, so it works without JS.
+         With JS we compose a readable body from the labelled fields, open it, and show the page's status panel. ---- */
+  $$('form[data-mailto]').forEach(function (form) {
+    form.addEventListener('submit', function (e) {
+      if (!form.checkValidity()) return;            // let the browser show its validation UI
+      e.preventDefault();
+      var lines = $$('input, select, textarea', form).filter(function (f) { return f.name; }).map(function (f) {
+        var lab = form.querySelector('label[for="' + f.id + '"]');
+        return (lab ? lab.textContent.trim() : f.name) + ': ' + f.value.trim();
+      });
+      var href = form.getAttribute('data-mailto') + (form.getAttribute('data-mailto').indexOf('?') > -1 ? '&' : '?') + 'body=' + encodeURIComponent(lines.join('\n'));
+      location.href = href;
+      var st = $('.status', form); if (st) { st.hidden = false; st.focus(); }
+    });
+  });
+
   /* ---- FAQ filter (used on faq.html) ---- */
   var q = $('#faq-q');
   if (q) {
