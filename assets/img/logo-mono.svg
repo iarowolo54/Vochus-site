@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 248 216" role="img" aria-label="Vochus Easy Save">
+  <!-- Single-colour mark for print, PDFs and receipts. The clasp outline is a cut-out, not white paint. -->
+  <defs>
+    <mask id="vx-mono-cut">
+      <rect width="248" height="216" fill="#fff"/>
+      <path fill="#000" d="M214 134 L240 134 L240 172 L214 172 Q196 172 196 153 Q196 134 214 134 Z"/>
+      <path fill="#fff" d="M214 139 L238 139 L238 167 L214 167 Q201 167 201 153 Q201 139 214 139 Z"/>
+      <circle cx="213" cy="153" r="5.5" fill="#000"/>
+    </mask>
+  </defs>
+  <g fill="#0F2A1D" mask="url(#vx-mono-cut)">
+    <path d="M133 36 Q140 20 160 20 L198 20 L127 197 Q123 206 110 206 L97 206 Q85 206 81 195 L72 167 Q70 160 77 158 L86 154 L107 100 Z"/>
+    <path d="M6 9 L42 9 Q67 11 77 30 L107 100 L86 154 Q78 166 69 156 Z"/>
+    <path d="M176 84 L199 52 Q203 47 211 48 L212 58 L185 83 Z"/>
+    <path d="M173 94 L214 63 Q220 59 226 61 L225 75 L196 89 L180 95 Z"/>
+    <path d="M171 98 L222 81 Q232 77 238 80 L238 97 Z"/>
+    <path d="M171 101 L231 101 Q238 101 238 108 L238 192 Q238 210 220 210 L139 210 Q125 210 129 199 Z"/>
+  </g>
+</svg>
