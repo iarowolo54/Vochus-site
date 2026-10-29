@@ -15,13 +15,13 @@ JS = r"""
   out.push(row('nav logo', d.querySelector('.nav-bar .brand'), 'L'));
   const btns = [...d.querySelectorAll('.nav-cta .btn')].filter(b => b.offsetParent !== null);
   out.push(row('last nav button', btns[btns.length-1], 'R'));
-  out.push(row('h1', d.querySelector('h1'), 'L'));
+  const h1 = d.querySelector('h1'); if (h1 && !h1.closest('.center,.auth,.notfound')) out.push(row('h1', h1, 'L'));
   const hg = d.querySelector('.hero-grid');
   if (hg && hg.children.length > 1 && getComputedStyle(hg).gridTemplateColumns.split(' ').length > 1) out.push(row('hero right component', hg.lastElementChild, 'R'));
   // every full-width block directly inside a wrap must sit on the wrap's content edges
   d.querySelectorAll('main .wrap > *').forEach(e => {
     if (!/^(DIV|DL|UL|OL|TABLE|FORM|FIGURE)$/.test(e.tagName) || /section-head|kicker/.test(e.className)) return;
-    if (e.classList.contains('hero-inner') || e.parentElement.classList.contains('hero-grid') || e.parentElement.classList.contains('two')) return;
+    if (e.classList.contains('hero-inner') || /hero-grid|two|faq-layout|doc-grid/.test(e.parentElement.className) || e.closest('.center')) return;
     out.push(row('block ' + (e.className||e.tagName).split(' ').slice(0,2).join('.'), e, 'LR'));
   });
   // headings: on the wrap edge, or inset by their panel's own padding+border

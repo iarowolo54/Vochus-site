@@ -46,6 +46,7 @@ p+p{margin-top:1em}
 a{color:var(--ink-green);text-decoration:none;text-underline-offset:4px}
 a:hover{text-decoration:underline}
 ul,ol{margin:0;padding:0}
+address{font-style:normal}
 img,svg{display:block;max-width:100%}
 img{height:auto}
 button,input,select,textarea{font:inherit;color:inherit;margin:0}
@@ -625,9 +626,9 @@ h2.h3{font-size:var(--t-h3);letter-spacing:-.01em;line-height:1.3}
 .contact-rows li:last-child{border-bottom:1px solid var(--line)}
 .contact-rows h3{font-size:16px;grid-column:2;padding-top:9px}
 .contact-rows .tile{grid-row:span 2}
-.contact-rows .body{grid-column:2;margin-top:4px;font-size:15px;color:var(--ink-2)}
-.contact-rows .body a{display:inline-flex;align-items:center;min-height:44px;color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums}
-.contact-rows .body a+a{margin-left:var(--s-4)}
+.contact-rows .body{grid-column:2;margin-top:4px;font-size:15px;color:var(--ink-2);display:flex;flex-wrap:wrap;gap:0 var(--s-5)}
+.contact-rows .body>a{display:inline-flex;align-items:center;min-height:44px;color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums}
+.contact-rows .body p a{font-weight:500}
 .contact-rows .body p{font-size:15px}
 
 /* ---------- 33. Long-form document (privacy) ---------- */
