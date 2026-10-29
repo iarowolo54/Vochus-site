@@ -52,11 +52,11 @@
         </ul>
       </li>
     </ul>
+    <a class="nav-login" href="login.html">Log In</a>
     <div class="nav-cta">
       <a class="btn btn-secondary btn-sm" href="agent.html">Apply as an Agent</a>
       <a class="btn btn-primary btn-sm" href="https://easysave.vochusglobalservices.co.uk/customer/enroll" data-app="register" rel="noopener">Start Earning Interest</a>
     </div>
-    <a class="nav-login" href="login.html">Log In</a>
     <a class="nav-burger" id="burger" href="#menu" aria-controls="menu" aria-expanded="false" aria-label="Menu"><svg class="ico i-menu" aria-hidden="true"><use href="#i-menu"/></svg><svg class="ico i-x" aria-hidden="true"><use href="#i-x"/></svg></a>
   </nav>
   <div class="sheet" id="menu">
@@ -92,23 +92,20 @@
   <div class="wrap hero-grid">
     <div>
       <span class="label">Nigeria's Digital Savings Platform</span>
-      <h1 id="hero-h">Save more.<br>Earn <span class="fig">12<span class="pct">%</span></span><a class="fn-mark" href="#fn1" aria-label="Footnote 1"><sup>1</sup></a><br>every year.</h1>
+      <h1 id="hero-h">Save more<span class="dot">.</span><br>Earn <span class="fig">12<span class="pct">%</span></span><a class="fn-mark" href="#fn1" aria-label="Footnote 1"><sup>1</sup></a><br>every year<span class="dot">.</span></h1>
       <p class="lede">Open a Vochus Easy Save account in minutes — save daily, weekly or monthly online and earn 12% annual interest on your balance. Secure, transparent, and built for Nigerians.</p>
       <div class="btn-row">
         <a class="btn btn-primary" href="https://easysave.vochusglobalservices.co.uk/customer/enroll" data-app="register" rel="noopener">Start Earning Interest<svg class="ico" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
         <a class="btn btn-secondary" href="how-it-works.html">See How It Works</a>
       </div>
-      <p class="fn"><span class="fn-n">1</span> per annum · online savers only</p>
+      <p class="fn" id="fn1"><span class="fn-n">1</span> per annum · online savers only</p>
     </div>
 
     <div class="card ledger" id="ledger">
       <div class="ledger-head">
-        <div>
-          <span class="k">Annual Interest Rate</span>
-          <div class="fig">12<span class="pct">%</span><a class="fn-mark" href="#fn1" aria-label="Footnote 1"><sup>1</sup></a></div>
-          <p class="fn">per annum · online savers only</p>
-        </div>
-        <img src="assets/img/logo.svg" alt="" width="36" height="31">
+        <span class="k">Annual Interest Rate</span>
+        <div class="fig">12<span class="pct">%</span><a class="fn-mark" href="#fn1" aria-label="Footnote 1"><sup>1</sup></a></div>
+        <p class="fn">per annum · online savers only</p>
       </div>
       <div class="ledger-rates">
         <div><span>Per Month</span><strong>1.00%</strong></div>
@@ -145,7 +142,6 @@
           <div class="rc-row plus"><dt><span>Interest applied (<span data-k="rate">1%</span>)</span><span class="lead" aria-hidden="true"></span></dt><dd data-k="interest">+<span class="naira">₦</span>150</dd></div>
           <div class="rc-row total"><dt><span>Payout</span><span class="lead" aria-hidden="true"></span></dt><dd data-k="payout" aria-live="polite"><span class="naira">₦</span>15,150</dd></div>
         </dl>
-        <p class="ledger-note">Example — per annum · online savers only</p>
       </details>
     </div>
   </div>
@@ -163,9 +159,10 @@
 </div>
 
 <section class="section section-how" id="how" aria-labelledby="how-h">
-  <div class="wrap">
-    <div class="section-head row">
+  <div class="wrap how">
+    <div class="section-head">
       <h2 id="how-h">How It Works</h2>
+      <p>Three simple steps from sign-up to your first payout.</p>
       <a class="btn-ghost" href="how-it-works.html">Learn more<svg class="ico ico-sm" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
     </div>
     <div class="path-wrap">
@@ -269,14 +266,18 @@
           <a class="btn btn-primary" href="agent.html">Apply as an Agent<svg class="ico" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
         </div>
       </div>
-      <figure>
-        <div class="photo crop-savers">
-          <picture>
-            <source type="image/webp" srcset="assets/img/photo-savers-480.webp 480w, assets/img/photo-savers-960.webp 960w" sizes="(min-width:900px) 45vw, 100vw">
-            <img src="assets/img/photo-savers-960.jpg" srcset="assets/img/photo-savers-480.jpg 480w, assets/img/photo-savers-960.jpg 960w" sizes="(min-width:900px) 45vw, 100vw" width="1280" height="853" loading="lazy" decoding="async" alt="Women of the community waiting in line, the people Vochus agents serve">
-          </picture>
-        </div>
-      </figure>
+      <div class="vig-card" aria-label="Agent commission">
+        <span class="k">Agent commission</span>
+        <div class="fig">65<span class="pct">%</span></div>
+        <p class="sub">of the commission your portfolio generates</p>
+        <dl class="receipt">
+          <div class="rc-row"><dt><span>Every cycle</span><span class="lead" aria-hidden="true"></span></dt><dd><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Yes</dd></div>
+          <div class="rc-row"><dt><span>Every member</span><span class="lead" aria-hidden="true"></span></dt><dd><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Yes</dd></div>
+          <div class="rc-row"><dt><span>Starter pack</span><span class="lead" aria-hidden="true"></span></dt><dd><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Provided</dd></div>
+          <div class="rc-row"><dt><span>Cap on earnings</span><span class="lead" aria-hidden="true"></span></dt><dd>No cap</dd></div>
+          <div class="rc-row total"><dt><span>Goes directly to you</span><span class="lead" aria-hidden="true"></span></dt><dd>65%</dd></div>
+        </dl>
+      </div>
     </div>
   </div>
 </section>
@@ -332,9 +333,6 @@
       <span>© 2026 Vochus Global Services Ltd. All rights reserved.</span>
       <a href="https://vochuseasysave.com/">www.vochuseasysave.com</a>
     </div>
-    <ol class="footer-notes">
-      <li id="fn1">per annum · online savers only</li>
-    </ol>
   </div>
 </footer>
 <!-- /footer -->

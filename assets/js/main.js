@@ -128,12 +128,12 @@
       var box = path.getBoundingClientRect(), nodes = $$('.node', path);
       if (nodes.length < 2) return;
       var pts = nodes.map(function (n) { var r = n.getBoundingClientRect(); return [r.left - box.left + r.width / 2, r.top - box.top + r.height / 2]; });
-      var a = pts[0], c = pts[pts.length - 1], yb = box.height + 28, R = 16;
+      var y = pts[0][1], x0 = -20, x1 = box.width, yb = box.height + 32, R = 16;
       var svg = d.createElementNS(svgNS, 'svg'); svg.setAttribute('class', 'path-svg'); svg.setAttribute('aria-hidden', 'true');
       svg.setAttribute('viewBox', '0 0 ' + box.width + ' ' + box.height);
-      var solid = d.createElementNS(svgNS, 'path'); solid.setAttribute('d', 'M' + a[0] + ' ' + a[1] + 'H' + c[0]);
+      var solid = d.createElementNS(svgNS, 'path'); solid.setAttribute('d', 'M' + x0 + ' ' + y + 'H' + x1);
       var loop = d.createElementNS(svgNS, 'path'); loop.setAttribute('class', 'dash');
-      loop.setAttribute('d', 'M' + c[0] + ' ' + c[1] + 'V' + (yb - R) + 'Q' + c[0] + ' ' + yb + ' ' + (c[0] - R) + ' ' + yb + 'H' + (a[0] + R) + 'Q' + a[0] + ' ' + yb + ' ' + a[0] + ' ' + (yb - R) + 'V' + a[1]);
+      loop.setAttribute('d', 'M' + x1 + ' ' + y + 'V' + (yb - R) + 'Q' + x1 + ' ' + yb + ' ' + (x1 - R) + ' ' + yb + 'H' + (x0 + R) + 'Q' + x0 + ' ' + yb + ' ' + x0 + ' ' + (yb - R) + 'V' + y);
       svg.appendChild(solid); svg.appendChild(loop); path.appendChild(svg); path.classList.add('has-svg');
       if (!animate) return;
       var len = solid.getTotalLength();

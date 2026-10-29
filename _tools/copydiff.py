@@ -18,6 +18,7 @@ def lines(src):
     s = re.sub(r"<sup\b.*?</sup>", " ", s, flags=re.S)
     s = re.sub(r'<[^>]+class="[^"]*sr-only[^"]*"[^>]*>.*?</[a-z0-9]+>', " ", s, flags=re.S)
     s = re.sub(r"<!--.*?-->", " ", s, flags=re.S)
+    s = re.sub(r'<span class="dot">(.*?)</span>', r"\1", s)
     s = re.sub(BLOCK, "\n", s, flags=re.I)
     s = re.sub(r"<[^>]+>", " ", s)
     s = html.unescape(s).replace("→", " ").replace("▾", " ")
