@@ -21,7 +21,7 @@ P = lambda *a: os.path.join(ROOT, *a)
 SITE = "https://vochuseasysave.com"
 
 # ---- The ONE place app destinations live (§10). Also stamped into assets/js/main.js. ----
-APP_BASE = "https://easysave.vochusglobalservices.co.uk"   # TODO confirm with client
+APP_BASE = "https://easysave.vochusglobalservices.co.uk"   # confirmed by the client 2026-10-29 (spec §10)
 APP = {
     "register":     APP_BASE + "/customer/enroll",
     "saver_login":  APP_BASE + "/customer/login",
@@ -63,7 +63,7 @@ def sprite_for(src):
     if missing:
         sys.exit(f"icons missing from _partials/sprite.html: {missing}")
     body = "".join(syms[u] for u in used)
-    return f'<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">{body}</svg>\n'
+    return f'<svg xmlns="http://www.w3.org/2000/svg" hidden aria-hidden="true">{body}</svg>\n'
 
 def assemble(path):
     page = os.path.basename(path)

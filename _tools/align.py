@@ -32,7 +32,7 @@ JS = r"""
     else out.push(row('h2 ' + h.textContent.trim().slice(0,22), h, h.closest('.two,.grid,.faq-layout,.doc-grid') ? 'X' : 'L'));
   });
   out.push(row('footer logo', d.querySelector('.footer .brand'), 'L'));
-  const w = d.querySelector('main .wrap'); const cs = getComputedStyle(w); const wb = r(w);
+  const w = d.querySelector('main .wrap') || d.querySelector('.nav-bar'); const cs = getComputedStyle(w); const wb = r(w);
   const left = wb.left + parseFloat(cs.paddingLeft), right = wb.right - parseFloat(cs.paddingRight);
   document.body.insertAdjacentHTML('beforeend', '<pre id="al'+'ign">' + JSON.stringify({left, right, rows: out, sw: d.documentElement.scrollWidth}) + '</p'+'re>');
 })();
