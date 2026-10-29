@@ -11,10 +11,13 @@ JS = r"""
 (() => {
   const d = f.contentDocument, w = f.contentWindow, W = f.offsetWidth;
   const vis = e => { const r = e.getBoundingClientRect(); const cs = w.getComputedStyle(e); return r.width > 0 && r.height > 0 && cs.visibility !== 'hidden'; };
-  const out = { scrollWidth: d.documentElement.scrollWidth, width: W, tap: [], contrast: [], small: [] };
+  const out = { scrollWidth: d.documentElement.scrollWidth, width: W, tap: [], contrast: [], small: [], overflow: [] };
+  if (out.scrollWidth > W) d.querySelectorAll('body *').forEach(e => { const r = e.getBoundingClientRect(); if (r.right > W + 0.5 && r.width > 0 && !e.closest('.sheet,.menu') && out.overflow.length < 12) out.overflow.push(`${e.tagName.toLowerCase()}.${(e.className||'').toString().split(' ')[0]} right=${Math.round(r.right)} w=${Math.round(r.width)}`); });
   d.querySelectorAll('a[href],button,summary,input,select').forEach(e => {
     if (!vis(e)) return;
-    const r = e.getBoundingClientRect();
+    let r = e.getBoundingClientRect();
+    const ps = w.getComputedStyle(e, '::after');   // absolute ::after boxes extend the hit area
+    if (ps.position === 'absolute' && ps.content !== 'none') { const t = parseFloat(ps.top)||0, b = parseFloat(ps.bottom)||0, l = parseFloat(ps.left)||0, rr = parseFloat(ps.right)||0; r = { width: r.width - l - rr, height: r.height - t - b }; }
     // inline links inside running text are exempt (WCAG 2.5.8 inline exception); flag everything else
     const inline = e.tagName === 'A' && w.getComputedStyle(e).display === 'inline' && e.closest('p,li,figcaption,address,dd');
     if (!inline && (r.width < 44 || r.height < 44)) out.tap.push(`${e.tagName.toLowerCase()}.${(e.className||'').toString().split(' ')[0]} "${(e.textContent||e.value||'').trim().slice(0,30)}" ${Math.round(r.width)}x${Math.round(r.height)}`);
@@ -55,7 +58,7 @@ def main():
         sys.exit("probe failed: " + r.stderr[-500:])
     o = json.loads(m.group(1).replace("&lt;", "<").replace("&amp;", "&"))
     print(f"{os.path.basename(page)} @ {width}px — scrollWidth {o['scrollWidth']} ({'OK' if o['scrollWidth'] <= width else 'HORIZONTAL OVERFLOW'})")
-    for k, label in (("tap", "tap targets < 44x44"), ("contrast", "contrast failures"), ("small", "text below minimum size")):
+    for k, label in (("overflow", "elements past the right edge"), ("tap", "tap targets < 44x44"), ("contrast", "contrast failures"), ("small", "text below minimum size")):
         print(f"  {label}: {len(o[k])}")
         for x in o[k]: print("    - " + x)
 

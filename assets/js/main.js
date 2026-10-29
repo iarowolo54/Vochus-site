@@ -114,6 +114,23 @@
       amt.addEventListener('input', function () { dirty = true; render(); });
       dur.addEventListener('change', render);
       ctl.addEventListener('submit', function (e) { e.preventDefault(); render(); });
+      /* Worked-example presets (interest.html): a preset is "pressed" while the controls still match it */
+      var presets = $$('.ex', ledger);
+      var syncPresets = function () {
+        var v = Number(amt.value.replace(/[,\s]/g, ''));
+        presets.forEach(function (b) {
+          b.setAttribute('aria-pressed', String(b.dataset.plan === plan && Number(b.dataset.amount) === v && Number(b.dataset.dur) === dur.selectedIndex));
+        });
+      };
+      presets.forEach(function (b) {
+        b.addEventListener('click', function () {
+          plan = b.dataset.plan;
+          $$('.seg-btn', ledger).forEach(function (x) { x.setAttribute('aria-pressed', String(x.value === plan)); });
+          fillDur(); dur.selectedIndex = Number(b.dataset.dur); amt.value = b.dataset.amount; dirty = false;
+          render(); syncPresets();
+        });
+      });
+      if (presets.length) { ['input', 'change', 'click'].forEach(function (ev) { ctl.addEventListener(ev, syncPresets); }); }
       fillDur(); ctl.hidden = false;
     }
   }
