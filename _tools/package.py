@@ -17,6 +17,9 @@ def refs_in(text):
     out = set()
     for m in re.finditer(r'(?:src|href|poster)="(assets/[^"#?]+)"', text):
         out.add(m.group(1))
+    # absolute self-references in meta tags (og:image, twitter:image)
+    for m in re.finditer(r'content="https://(?:www\.)?vochuseasysave\.com/(assets/[^"#?]+)"', text):
+        out.add(m.group(1))
     for m in re.finditer(r'srcset="([^"]+)"', text):
         for part in m.group(1).split(","):
             u = part.strip().split(" ")[0]
