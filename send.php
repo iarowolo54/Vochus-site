@@ -151,12 +151,6 @@ if ($t !== '' && ctype_digit($t)) {
     }
 }
 
-// ---- rate limit ----
-$ip = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
-if (!rate_ok($ip, (int) $config['rate_limit']['max'], (int) $config['rate_limit']['window'])) {
-    respond(false, 429, ['errors' => ['form' => 'Too many messages from this connection. Please try again later or email us directly.']], $backTo, $wantsJson);
-}
-
 // ---- collect and validate the whitelisted fields ----
 $values = [];
 $errors = [];
@@ -183,6 +177,12 @@ foreach ($spec['fields'] as $key => $rule) {
 }
 if ($errors) {
     respond(false, 422, ['errors' => $errors], $backTo, $wantsJson);
+}
+
+// ---- rate limit (after validation, so someone correcting typos isn't locked out) ----
+$ip = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
+if (!rate_ok($ip, (int) $config['rate_limit']['max'], (int) $config['rate_limit']['window'])) {
+    respond(false, 429, ['errors' => ['form' => 'Too many messages from this connection. Please try again later or email us directly.']], $backTo, $wantsJson);
 }
 
 // ---- compose ----
