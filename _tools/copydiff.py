@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Text-node diff between the committed original page and the rebuilt one.
-usage: copydiff.py <page.html>   (compares `git show 7807f64:<page>` with the working file)
+usage: copydiff.py <page.html> [--against DIR]   (compares `git show 7807f64:<page>`, or DIR/<page>, with the working file)
 
 Text is taken from <body>, split at block boundaries, whitespace-normalised and compared as
 multisets. Stripped before comparing: <script>/<style>, <svg>, <sup> footnote markers,
@@ -32,7 +32,10 @@ def lines(src):
 def main():
     page = sys.argv[1]
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    old = subprocess.run(["git", "-C", root, "show", f"{BASELINE}:{os.path.basename(page)}"], capture_output=True, text=True).stdout
+    if "--against" in sys.argv:
+        old = open(os.path.join(sys.argv[sys.argv.index("--against") + 1], os.path.basename(page)), encoding="utf-8").read()
+    else:
+        old = subprocess.run(["git", "-C", root, "show", f"{BASELINE}:{os.path.basename(page)}"], capture_output=True, text=True).stdout
     new = open(os.path.join(root, os.path.basename(page)), encoding="utf-8").read()
     a, b = collections.Counter(lines(old)), collections.Counter(lines(new))
     removed, added = a - b, b - a

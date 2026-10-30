@@ -931,6 +931,49 @@ h2.h3{font-size:var(--t-h3);letter-spacing:-.01em;line-height:1.3}
 .faq-layout.single{display:block}
 .faq-layout.single .faq-main{margin-inline:auto}
 
+/* ---------- 38. Zipwaves: products section, customer paths, endorsement lockup ---------- */
+.ptag{display:inline-flex;align-items:center;height:28px;padding:0 12px;border-radius:var(--r-pill);background:var(--tint);color:var(--ink-green);font:600 14px/1 var(--font-body);white-space:nowrap}
+.products{display:grid;grid-template-columns:1fr 1fr;gap:var(--g)}
+.product{display:flex;flex-direction:column;padding:var(--s-6)}
+.product-head{display:flex;align-items:center;justify-content:space-between;gap:var(--s-3)}
+.product-head .tile{width:48px;height:48px;border-radius:var(--r-lg)}
+.product-head .tile .ico{width:24px;height:24px}
+.card.product h3{margin-top:var(--s-5);font-size:24px;letter-spacing:-.012em}
+.card.product h3+p{margin-top:var(--s-2);font-size:16px;color:var(--ink-2)}
+.product .checks{margin-top:var(--s-5);gap:var(--s-3)}
+.product .checks li{font-size:16px}
+.product .btn-row{margin-top:auto;padding-top:var(--s-6);gap:var(--s-3) var(--s-5)}
+.about-zw{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:var(--s-6);margin-top:var(--g);padding:var(--s-6);background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl)}
+.about-zw img{width:128px;height:auto}
+.about-zw p{font-size:17px;color:var(--ink-2);max-width:62ch;padding-left:var(--s-6);border-left:1px solid var(--line-strong)}
+.about-zw p strong{color:var(--ink);font-weight:600}
+@media (max-width:899px){.products{grid-template-columns:1fr}}
+@media (max-width:599px){
+  .product{padding:var(--s-5)}
+  .about-zw{grid-template-columns:1fr;gap:var(--s-4);padding:var(--s-5)}
+  .about-zw img{width:104px}
+  .about-zw p{padding-left:0;border-left:0;padding-top:var(--s-4);border-top:1px solid var(--line)}
+}
+/* customer paths: three numbered cards, each with a tag, title and three steps */
+.paths{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:var(--g)}
+.path{display:flex;flex-direction:column;padding:var(--s-5)}
+.path-head{display:flex;align-items:center;justify-content:space-between;gap:var(--s-3)}
+.card.path h3{margin-top:var(--s-4);font-size:21px;letter-spacing:-.01em}
+.path .ol-steps{margin-top:var(--s-5);gap:var(--s-4)}
+.path .ol-steps li{font-size:15px;line-height:1.55}
+.path .ol-steps li b,.path .ol-steps li span{grid-column:2}
+.path .ol-steps li b{display:block;color:var(--ink);font-weight:600;font-size:16px;line-height:32px}
+.path .ol-steps li span{display:block;margin-top:2px}
+.band-deep .path{border-color:transparent}
+@media (max-width:899px){.paths{grid-template-columns:1fr}}
+/* footer endorsement lockup: logo, hairline, the parent-company sentence */
+.endorse{display:flex;align-items:center;gap:var(--s-5);margin-top:var(--s-5);padding-top:var(--s-5);border-top:1px solid var(--line)}
+.endorse picture,.endorse img{flex:none;display:block}
+.endorse img{width:96px;height:auto}
+.endorse p{padding-left:var(--s-5);border-left:1px solid var(--line-strong);font-size:16px;line-height:1.5;color:var(--ink-2);max-width:40ch}
+.endorse b{color:var(--ink);font-weight:600}
+@media (max-width:399px){.endorse{gap:var(--s-4)}.endorse img{width:80px}.endorse p{padding-left:var(--s-4);font-size:15px}}
+
 /* ---------- 24. Utilities ---------- */
 .muted{color:var(--ink-2)}
 .mt-2{margin-top:var(--s-2)}.mt-3{margin-top:var(--s-3)}.mt-4{margin-top:var(--s-4)}.mt-5{margin-top:var(--s-5)}.mt-6{margin-top:var(--s-6)}

@@ -23,7 +23,7 @@ atexit.register(lambda: [shutil.rmtree(d, ignore_errors=True) for d in _made])
 
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 SITE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MAX_H = 16000
+MAX_H = 20000
 
 WRAPPER = """<!doctype html><meta charset=utf-8>
 <style>html,body{{margin:0;background:#888}}iframe{{display:block;border:0;width:{w}px;height:{h}px}}</style>
