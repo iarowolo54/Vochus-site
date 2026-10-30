@@ -45,9 +45,9 @@ extensions are enough; `mbstring` is recommended.
 
 ## 4. Email: the sending address and deliverability
 
-The forms send from `no-reply@vochuseasysave.com` and deliver to `info@vochuseasysave.com`.
+The forms send from `noreply@vochuseasysave.com` and deliver to `info@vochuseasysave.com`.
 
-1. DirectAdmin → **E-mail Manager → E-mail Accounts** → create `no-reply@vochuseasysave.com` (any strong password; nobody
+1. DirectAdmin → **E-mail Manager → E-mail Accounts** → create `noreply@vochuseasysave.com` (any strong password; nobody
    needs to log into it). Confirm `info@vochuseasysave.com` exists or forwards somewhere that is read.
 2. DirectAdmin → **E-mail Manager** (or **DNS Management**) → enable **DKIM** for the domain, and make sure the **SPF**
    record includes this server (DirectAdmin usually adds `v=spf1 a mx ip4:<server> ~all` when DKIM/SPF is enabled). Both

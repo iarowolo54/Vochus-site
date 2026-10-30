@@ -4,7 +4,7 @@
 return [
     'to'        => 'info@vochuseasysave.com',
     'from_name' => 'Vochus Website',
-    'from'      => 'no-reply@vochuseasysave.com',   // must be a mailbox (or a sender the domain is allowed to use)
+    'from'      => 'noreply@vochuseasysave.com',   // must be a mailbox (or a sender the domain is allowed to use)
     'site'      => 'https://vochuseasysave.com',
     'timezone'  => 'Africa/Lagos',
     'rate_limit' => ['max' => 5, 'window' => 3600],  // submissions per IP per window (seconds)

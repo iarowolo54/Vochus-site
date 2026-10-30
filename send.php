@@ -6,7 +6,7 @@
  *   - POST only; fields are whitelisted per form, trimmed and length-limited; CR/LF rejected in header values.
  *   - Spam: honeypot ("website"), JS timing ("t", under 3s = bot), 5 submissions per IP per hour (flat file in a
  *     non-public directory: ../vochus-data when writable, otherwise the system temp dir).
- *   - Sends with mail() from no-reply@vochuseasysave.com, Reply-To the visitor, envelope sender set with -f.
+ *   - Sends with mail() from noreply@vochuseasysave.com, Reply-To the visitor, envelope sender set with -f.
  *   - Responds with JSON when the request accepts application/json, otherwise a 303 redirect
  *     (thanks.html?f=... on success, back to the page with ?error=1#form on failure).
  *   - VOCHUS_MAIL_DRYRUN=1 (environment) writes the composed email to the data dir instead of sending. Off by default.
