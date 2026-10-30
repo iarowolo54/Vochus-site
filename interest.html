@@ -26,7 +26,7 @@
 </head>
 <body>
 <!-- sprite -->
-<svg xmlns="http://www.w3.org/2000/svg" hidden aria-hidden="true"><symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></symbol><symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" /></symbol><symbol id="i-menu" viewBox="0 0 24 24"><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></symbol></svg>
+<svg xmlns="http://www.w3.org/2000/svg" hidden aria-hidden="true"><symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></symbol><symbol id="i-menu" viewBox="0 0 24 24"><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></symbol></svg>
 <!-- /sprite -->
 <!-- nav -->
 <a class="skip" href="#main">Skip to content</a>
@@ -34,21 +34,11 @@
   <nav class="wrap nav-bar" aria-label="Main">
     <a class="brand" href="index.html"><img src="assets/img/logo.svg" alt="" width="32" height="28"><span>Vochus Easy Save</span></a>
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
       <li><a href="how-it-works.html">How It Works</a></li>
       <li><a href="plans.html">Savings Plans</a></li>
       <li><a href="interest.html" aria-current="page">Interest</a></li>
-      <li><a href="benefits.html">Benefits</a></li>
       <li><a href="agent.html">Become an Agent</a></li>
-      <li class="has-menu">
-        <button type="button" id="support-btn" aria-expanded="false" aria-controls="support-menu" aria-haspopup="true">Support <svg class="ico" aria-hidden="true"><use href="#i-chevron-down"/></svg></button>
-        <ul class="menu" id="support-menu" hidden>
-          <li><a href="portal.html">Customer Portal</a></li>
-          <li><a href="faq.html">FAQs</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="privacy.html">Privacy Policy</a></li>
-        </ul>
-      </li>
+      <li><a href="faq.html">FAQs</a></li>
     </ul>
     <a class="nav-login" href="login.html">Log In</a>
     <div class="nav-cta">
@@ -59,18 +49,17 @@
   </nav>
   <div class="sheet" id="menu">
     <ul>
-      <li><a href="index.html">Home</a></li>
       <li><a href="how-it-works.html">How It Works</a></li>
       <li><a href="plans.html">Savings Plans</a></li>
       <li><a href="interest.html" aria-current="page">Interest</a></li>
+      <li><a href="agent.html">Become an Agent</a></li>
+      <li><a href="faq.html">FAQs</a></li>
+    </ul>
+    <p class="sheet-group">More</p>
+    <ul class="sheet-more">
       <li><a href="benefits.html">Benefits</a></li>
       <li><a href="index.html#community">Community</a></li>
-      <li><a href="agent.html">Become an Agent</a></li>
-    </ul>
-    <p class="sheet-group">Support</p>
-    <ul>
       <li><a href="portal.html">Customer Portal</a></li>
-      <li><a href="faq.html">FAQs</a></li>
       <li><a href="contact.html">Contact</a></li>
       <li><a href="privacy.html">Privacy Policy</a></li>
       <li><a href="login.html">Log In</a></li>
@@ -93,9 +82,9 @@
       <h1 id="hero-h">Your savings work harder with Vochus</h1>
       <p class="lede">Interest is calculated on your total savings at the end of your cycle, prorated for the months you saved, and added to your payout automatically.</p>
     </div>
-    <div class="rate" aria-describedby="fn1">
-      <div class="fig">12<span class="pct">%</span><a class="fn-mark" href="#fn1" aria-label="Footnote 1"><sup>1</sup></a></div>
-      <p class="fn" id="fn1"><span class="fn-n">1</span> per annum · online savers only</p>
+    <div class="rate" aria-describedby="rate-note">
+      <div class="fig">12<span class="pct">%</span></div>
+      <p class="fn" id="rate-note">per annum · online savers only</p>
     </div>
   </div>
 </section>
@@ -129,17 +118,17 @@
         </div>
       </form>
       <dl class="receipt">
-        <div class="rc-row"><dt><span>Plan</span><span class="lead" aria-hidden="true"></span></dt><dd class="txt" data-k="plan">Daily — ₦500 × 30 days</dd></div>
+        <div class="rc-row"><dt><span>Plan</span><span class="lead" aria-hidden="true"></span></dt><dd class="txt" data-k="plan">Daily · ₦500 × 30 days</dd></div>
         <div class="rc-row"><dt><span>Saved</span><span class="lead" aria-hidden="true"></span></dt><dd data-k="saved"><span class="naira">₦</span>15,000</dd></div>
         <div class="rc-row plus"><dt><span>Interest applied (<span data-k="rate">1%</span>)</span><span class="lead" aria-hidden="true"></span></dt><dd data-k="interest">+<span class="naira">₦</span>150</dd></div>
         <div class="rc-row total"><dt><span>Payout</span><span class="lead" aria-hidden="true"></span></dt><dd data-k="payout" aria-live="polite"><span class="naira">₦</span>15,150</dd></div>
       </dl>
       <p class="examples-h" id="ex-h">Worked examples</p>
       <ol class="examples" aria-labelledby="ex-h">
-        <li><button type="button" class="ex" data-plan="daily" data-amount="500" data-dur="0" aria-pressed="true"><span><span class="t">Daily — ₦500 × 30 days</span><span class="s">₦15,000 saved · 1% applied (1 month)</span></span><span><span class="v"><span class="naira">₦</span>15,150</span><span class="e">+₦150 interest</span></span></button></li>
-        <li><button type="button" class="ex" data-plan="weekly" data-amount="2000" data-dur="0" aria-pressed="false"><span><span class="t">Weekly — ₦2,000 × 13 weeks</span><span class="s">₦26,000 saved · 3% applied (3 months)</span></span><span><span class="v"><span class="naira">₦</span>26,780</span><span class="e">+₦780 interest</span></span></button></li>
-        <li><button type="button" class="ex" data-plan="monthly" data-amount="10000" data-dur="1" aria-pressed="false"><span><span class="t">Monthly — ₦10,000 × 6 months</span><span class="s">₦60,000 saved · 6% applied (6 months)</span></span><span><span class="v"><span class="naira">₦</span>63,600</span><span class="e">+₦3,600 interest</span></span></button></li>
-        <li><button type="button" class="ex" data-plan="monthly" data-amount="10000" data-dur="2" aria-pressed="false"><span><span class="t">Monthly — ₦10,000 × 12 months</span><span class="s">₦120,000 saved · 12% applied (full year)</span></span><span><span class="v"><span class="naira">₦</span>134,400</span><span class="e">+₦14,400 interest</span></span></button></li>
+        <li><button type="button" class="ex" data-plan="daily" data-amount="500" data-dur="0" aria-pressed="true"><span><span class="t">Daily · ₦500 × 30 days</span><span class="s">₦15,000 saved · 1% applied (1 month)</span></span><span><span class="v"><span class="naira">₦</span>15,150</span><span class="e">+₦150 interest</span></span></button></li>
+        <li><button type="button" class="ex" data-plan="weekly" data-amount="2000" data-dur="0" aria-pressed="false"><span><span class="t">Weekly · ₦2,000 × 13 weeks</span><span class="s">₦26,000 saved · 3% applied (3 months)</span></span><span><span class="v"><span class="naira">₦</span>26,780</span><span class="e">+₦780 interest</span></span></button></li>
+        <li><button type="button" class="ex" data-plan="monthly" data-amount="10000" data-dur="1" aria-pressed="false"><span><span class="t">Monthly · ₦10,000 × 6 months</span><span class="s">₦60,000 saved · 6% applied (6 months)</span></span><span><span class="v"><span class="naira">₦</span>63,600</span><span class="e">+₦3,600 interest</span></span></button></li>
+        <li><button type="button" class="ex" data-plan="monthly" data-amount="10000" data-dur="2" aria-pressed="false"><span><span class="t">Monthly · ₦10,000 × 12 months</span><span class="s">₦120,000 saved · 12% applied (full year)</span></span><span><span class="v"><span class="naira">₦</span>134,400</span><span class="e">+₦14,400 interest</span></span></button></li>
       </ol>
     </div>
 
@@ -160,7 +149,7 @@
       <h2 class="h3 sub">How It's Applied</h2>
       <ol class="ol-steps">
         <li>Interest is calculated on your total savings amount at cycle end, prorated for the number of months you saved.</li>
-        <li>Added automatically to your payout — no separate claim, no forms.</li>
+        <li>Added automatically to your payout. No separate claim, no forms.</li>
         <li>Applies to online contributions via the Customer Portal. Ask your agent about eligibility.</li>
       </ol>
     </div>
@@ -171,7 +160,7 @@
   <div class="wrap">
     <div class="cta">
       <h2 id="cta-h">Save more. Earn 12% every year.</h2>
-      <p>Open a Vochus Easy Save account in minutes — save daily, weekly or monthly online and earn 12% annual interest on your balance.</p>
+      <p>Open a Vochus Easy Save account in minutes: save daily, weekly or monthly online and earn 12% annual interest on your balance.</p>
       <div class="btn-row">
         <a class="btn btn-primary" href="https://easysave.vochusglobalservices.co.uk/customer/enroll" data-app="register" rel="noopener">Start Earning 12% Today<svg class="ico" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
       </div>
@@ -185,7 +174,7 @@
   <div class="wrap">
     <div class="footer-top">
       <a class="brand" href="index.html"><img src="assets/img/logo.svg" alt="" width="28" height="24"><span>Vochus Easy Save</span></a>
-      <p>Nigeria's digital savings platform — save daily, weekly or monthly online and earn 12% annual interest. Secure, transparent, and built for Nigerians.</p>
+      <p>Nigeria's digital savings platform: save daily, weekly or monthly online and earn 12% annual interest. Secure, transparent, and built for Nigerians.</p>
     </div>
     <nav class="footer-cols" aria-label="Footer">
       <div>

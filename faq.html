@@ -26,7 +26,7 @@
 </head>
 <body>
 <!-- sprite -->
-<svg xmlns="http://www.w3.org/2000/svg" hidden aria-hidden="true"><symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" /></symbol><symbol id="i-menu" viewBox="0 0 24 24"><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14" /><path d="M12 5v14" /></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></symbol></svg>
+<svg xmlns="http://www.w3.org/2000/svg" hidden aria-hidden="true"><symbol id="i-menu" viewBox="0 0 24 24"><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14" /><path d="M12 5v14" /></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></symbol></svg>
 <!-- /sprite -->
 <!-- nav -->
 <a class="skip" href="#main">Skip to content</a>
@@ -34,21 +34,11 @@
   <nav class="wrap nav-bar" aria-label="Main">
     <a class="brand" href="index.html"><img src="assets/img/logo.svg" alt="" width="32" height="28"><span>Vochus Easy Save</span></a>
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
       <li><a href="how-it-works.html">How It Works</a></li>
       <li><a href="plans.html">Savings Plans</a></li>
       <li><a href="interest.html">Interest</a></li>
-      <li><a href="benefits.html">Benefits</a></li>
       <li><a href="agent.html">Become an Agent</a></li>
-      <li class="has-menu">
-        <button type="button" id="support-btn" aria-expanded="false" aria-controls="support-menu" aria-haspopup="true">Support <svg class="ico" aria-hidden="true"><use href="#i-chevron-down"/></svg></button>
-        <ul class="menu" id="support-menu" hidden>
-          <li><a href="portal.html">Customer Portal</a></li>
-          <li><a href="faq.html" aria-current="page">FAQs</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="privacy.html">Privacy Policy</a></li>
-        </ul>
-      </li>
+      <li><a href="faq.html" aria-current="page">FAQs</a></li>
     </ul>
     <a class="nav-login" href="login.html">Log In</a>
     <div class="nav-cta">
@@ -59,18 +49,17 @@
   </nav>
   <div class="sheet" id="menu">
     <ul>
-      <li><a href="index.html">Home</a></li>
       <li><a href="how-it-works.html">How It Works</a></li>
       <li><a href="plans.html">Savings Plans</a></li>
       <li><a href="interest.html">Interest</a></li>
+      <li><a href="agent.html">Become an Agent</a></li>
+      <li><a href="faq.html" aria-current="page">FAQs</a></li>
+    </ul>
+    <p class="sheet-group">More</p>
+    <ul class="sheet-more">
       <li><a href="benefits.html">Benefits</a></li>
       <li><a href="index.html#community">Community</a></li>
-      <li><a href="agent.html">Become an Agent</a></li>
-    </ul>
-    <p class="sheet-group">Support</p>
-    <ul>
       <li><a href="portal.html">Customer Portal</a></li>
-      <li><a href="faq.html" aria-current="page">FAQs</a></li>
       <li><a href="contact.html">Contact</a></li>
       <li><a href="privacy.html">Privacy Policy</a></li>
       <li><a href="login.html">Log In</a></li>
@@ -121,14 +110,14 @@
     <div class="faq-main">
       <section class="faq-group" id="savers" aria-labelledby="g-savers">
         <h2 id="g-savers">For savers</h2>
-        <details class="faq"><summary>How do I register with Vochus Easy Save?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="ans"><p>Visit <strong>vochuseasysave.com</strong> and click <em>Create an Account</em> on the Log In page. Fill in your name, phone number, BVN and preferred savings plan. Your dedicated Vochus agent will contact you within 24 hours to complete onboarding — no branch visits required.</p></div></details>
+        <details class="faq"><summary>How do I register with Vochus Easy Save?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="ans"><p>Visit <strong>vochuseasysave.com</strong> and click <em>Create an Account</em> on the Log In page. Fill in your name, phone number, BVN and preferred savings plan. Your dedicated Vochus agent will contact you within 24 hours to complete onboarding. No branch visits required.</p></div></details>
         <details class="faq"><summary>What savings plans are available?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="ans"><p>We offer four flexible plans: <strong>Daily</strong> (save every day, paid out after your cycle), <strong>Weekly</strong> (weekly contributions, steady growth), <strong>Monthly</strong> (larger monthly deposits, best for salary earners), and <strong>Group / Ajo</strong> (traditional communal savings, fully digitalised). All plans earn 12% annual interest.</p></div></details>
         <details class="faq"><summary>How is the 12% annual interest calculated?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="ans"><p>Interest accrues daily on your saved balance at the equivalent daily rate of 12% per annum. For example, ₦50,000 saved for a full year earns ₦6,000 in interest. The exact amount is shown in your Customer Portal at any time and is paid out with your principal at the end of the cycle.</p></div></details>
-        <details class="faq"><summary>When and how am I paid out?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="ans"><p>Your payout — principal plus interest — is sent directly to your registered bank account when your savings cycle ends. The payout date is visible in your Customer Portal. Funds typically arrive within one business day. You can choose to re-enrol immediately into a new cycle after payout.</p></div></details>
+        <details class="faq"><summary>When and how am I paid out?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="ans"><p>Your payout, principal plus interest, is sent directly to your registered bank account when your savings cycle ends. The payout date is visible in your Customer Portal. Funds typically arrive within one business day. You can choose to re-enrol immediately into a new cycle after payout.</p></div></details>
         <details class="faq"><summary>Is my money safe with Vochus?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="ans"><p>Vochus Global Services Ltd is a registered Nigerian company. All customer funds are held in dedicated, ring-fenced bank accounts separate from operational funds. Your BVN is used solely for identity verification and is never shared with third parties. We employ bank-grade encryption on all data transmissions.</p></div></details>
-        <details class="faq"><summary>Can I withdraw early or pause my contributions?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="ans"><p>Savings plans are designed as fixed cycles to help you maintain discipline and earn the full interest. Early withdrawals may forfeit accrued interest. If you encounter an emergency, contact your dedicated Vochus agent — they can advise you on your options based on your specific plan and contribution history.</p></div></details>
-        <details class="faq"><summary>What is the Group Savings (Ajo/Esusu) plan?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="ans"><p>The Group plan is a digitalised version of the traditional Ajo or Esusu rotating savings system. Each member contributes a fixed amount on a set schedule, and members receive the pooled total in rotation. Vochus manages the cycle digitally — transparent timelines, digital records, no cash confusion, and the same 12% interest on individual contributions.</p></div></details>
-        <details class="faq"><summary>How do I become a Vochus agent?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="ans"><p>Apply via <strong>vochuseasysave.com/agent</strong>. Successful agents receive a starter pack (T-shirt, cap, bag, power bank, Bluetooth printer and paper rolls) plus full training and digital tools. You earn 65% of every commission generated by savers in your portfolio — with no cap on earnings.</p></div></details>
+        <details class="faq"><summary>Can I withdraw early or pause my contributions?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="ans"><p>Savings plans are designed as fixed cycles to help you maintain discipline and earn the full interest. Early withdrawals may forfeit accrued interest. If you encounter an emergency, contact your dedicated Vochus agent. They can advise you on your options based on your specific plan and contribution history.</p></div></details>
+        <details class="faq"><summary>What is the Group Savings (Ajo/Esusu) plan?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="ans"><p>The Group plan is a digitalised version of the traditional Ajo or Esusu rotating savings system. Each member contributes a fixed amount on a set schedule, and members receive the pooled total in rotation. Vochus manages the cycle digitally: transparent timelines, digital records, no cash confusion, and the same 12% interest on individual contributions.</p></div></details>
+        <details class="faq"><summary>How do I become a Vochus agent?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="ans"><p>Apply via <strong>vochuseasysave.com/agent</strong>. Successful agents receive a starter pack (T-shirt, cap, bag, power bank, Bluetooth printer and paper rolls) plus full training and digital tools. You earn 65% of every commission generated by savers in your portfolio, with no cap on earnings.</p></div></details>
       </section>
 
       <section class="faq-group" id="agents" aria-labelledby="g-agents">
@@ -192,7 +181,7 @@
   <div class="wrap">
     <div class="footer-top">
       <a class="brand" href="index.html"><img src="assets/img/logo.svg" alt="" width="28" height="24"><span>Vochus Easy Save</span></a>
-      <p>Nigeria's digital savings platform — save daily, weekly or monthly online and earn 12% annual interest. Secure, transparent, and built for Nigerians.</p>
+      <p>Nigeria's digital savings platform: save daily, weekly or monthly online and earn 12% annual interest. Secure, transparent, and built for Nigerians.</p>
     </div>
     <nav class="footer-cols" aria-label="Footer">
       <div>
