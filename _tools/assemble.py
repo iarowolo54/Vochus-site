@@ -79,8 +79,8 @@ def assemble(path):
         preload = ('<link rel="preload" href="assets/fonts/PlusJakartaSans-var-latin.woff2" as="font" type="font/woff2" crossorigin>\n'
                    '<link rel="preload" href="assets/fonts/Inter-400-latin.woff2" as="font" type="font/woff2" crossorigin>\n')
         # LCP image: the hero photo, art-directed (graded full image >= 1024px, trader crop below)
-        preload += ('<link rel="preload" as="image" type="image/webp" imagesrcset="assets/img/hero-trader-960.webp 960w, assets/img/hero-trader-1376.webp 1376w" imagesizes="100vw" media="(min-width:1024px)" fetchpriority="high">\n'
-                    '<link rel="preload" as="image" type="image/webp" imagesrcset="assets/img/hero-trader-m-640.webp 640w, assets/img/hero-trader-m-956.webp 956w" imagesizes="100vw" media="(max-width:1023px)" fetchpriority="high">\n')
+        preload += ('<link rel="preload" as="image" type="image/webp" imagesrcset="assets/img/hero-trader-1376.webp 1376w, assets/img/hero-trader-1920.webp 1920w, assets/img/hero-trader-2752.webp 2752w" imagesizes="100vw" media="(min-width:1024px)" fetchpriority="high">\n'
+                    '<link rel="preload" as="image" type="image/webp" imagesrcset="assets/img/hero-trader-m-640.webp 640w, assets/img/hero-trader-m-956.webp 956w, assets/img/hero-trader-m-1280.webp 1280w" imagesizes="100vw" media="(max-width:1023px)" fetchpriority="high">\n')
     head = (read("head.html").replace("{{CANONICAL}}", canonical).replace("{{TITLE}}", html.escape(title, quote=True))
             .replace("{{DESCRIPTION}}", html.escape(desc, quote=True)).replace("{{SITE}}", SITE).replace("{{PRELOAD}}", preload))
     nav = read("nav.html").replace("{{CTA}}", ctas(page))

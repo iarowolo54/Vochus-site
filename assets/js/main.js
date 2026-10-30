@@ -153,6 +153,27 @@
     });
   });
 
+  /* ---- Sticky sub-nav: mark the link whose section is in view (plain anchors without JS) ---- */
+  var subnav = $('.subnav');
+  if (subnav && 'IntersectionObserver' in window) {
+    var links = $$('a[href^="#"]', subnav), targets = links.map(function (a) { return $(a.getAttribute('href')); }).filter(Boolean);
+    var setActive = function (id) {
+      links.forEach(function (a) {
+        var on = a.getAttribute('href') === '#' + id; a.classList.toggle('is-active', on);
+        if (on) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current');
+        if (on && a.scrollIntoView && reduce.matches === false) { var ul = a.closest('ul'); if (ul && ul.scrollWidth > ul.clientWidth) ul.scrollTo({ left: a.offsetLeft - 12, behavior: 'smooth' }); }
+      });
+    };
+    var top = (nav ? nav.offsetHeight : 0) + subnav.offsetHeight + 24, current = null;
+    var pick = function () {
+      var best = null;
+      targets.forEach(function (t) { if (t.getBoundingClientRect().top - top <= 1) best = t; });
+      if (!best) best = targets[0];
+      if (best && best.id !== current) { current = best.id; setActive(current); }
+    };
+    addEventListener('scroll', pick, { passive: true }); addEventListener('resize', pick); pick();
+  }
+
   /* ---- FAQ filter (used on faq.html) ---- */
   var q = $('#faq-q');
   if (q) {

@@ -25,21 +25,29 @@ JS = r"""
   out.push(row('nav logo', d.querySelector('.nav-bar .brand'), 'L'));
   const btns = [...d.querySelectorAll('.nav-cta .btn')].filter(b => b.offsetParent !== null);
   out.push(row('last nav button', btns[btns.length-1], 'R'));
-  const h1 = d.querySelector('h1'); if (h1 && !h1.closest('.center,.auth,.notfound')) out.push(row('h1', h1, 'L'));
+  const h1 = d.querySelector('h1');
+  const hp = h1 && h1.closest('.hero-panel');
+  if (hp) { const cs = getComputedStyle(hp), pb = r(hp); const inset = parseFloat(cs.paddingLeft) + parseFloat(cs.borderLeftWidth);
+    out.push(['h1 (in hero panel)', Math.round(r(h1).left*100)/100, Math.round(pb.left*100)/100, 'I', inset]);
+    out.push(row('hero panel', hp, 'LR'));
+    const v = hp.querySelector('.vcard'); if (v && getComputedStyle(hp).gridTemplateColumns.split(' ').length > 1) out.push(['hero panel vignette', Math.round(r(v).right*100)/100, Math.round((pb.right - parseFloat(cs.paddingRight) - parseFloat(cs.borderRightWidth))*100)/100, 'E']); }
+  else if (h1 && !h1.closest('.center,.auth,.notfound')) out.push(row('h1', h1, 'L'));
   const hg = d.querySelector('.hero-grid');
   if (hg && hg.children.length > 1 && getComputedStyle(hg).gridTemplateColumns.split(' ').length > 1) out.push(row('hero right component', hg.lastElementChild, 'R'));
   // every full-width block directly inside a wrap must sit on the wrap's content edges
   d.querySelectorAll('main .wrap > *').forEach(e => {
     if (!/^(DIV|DL|UL|OL|TABLE|FORM|FIGURE)$/.test(e.tagName) || /section-head/.test(e.className)) return;
-    if (e.classList.contains('hero-inner') || /hero-grid|two|faq-layout|doc-grid|auth-split/.test(e.parentElement.className) || e.closest('.center')) return;
+    if (e.classList.contains('hero-inner') || /hero-grid|two|faq-layout|doc-grid|auth-split|teaser/.test(e.parentElement.className) || e.closest('.center,.subnav,.frow .wrap')) return;
+    if (e.closest('.frow')) { out.push(row('feature row grid', e.parentElement, 'LR')); return; }
     out.push(row('block ' + (e.className||e.tagName).split(' ').slice(0,2).join('.'), e, 'LR'));
   });
   // headings: on the wrap edge, or inset by their panel's own padding+border
   d.querySelectorAll('main h2').forEach(h => {
-    const panel = h.closest('.trust,.band,.cta,.card,.card-quiet,.vig,.ledger,.form-card,.plate');
+    const panel = h.closest('.trust,.band,.cta,.cta-strip,.card,.card-quiet,.vig,.ledger,.form-card,.plate,.app-panel');
+    if (h.closest('.ftext,.center,.app-panel,.vcard')) return;
     if (panel) { const cs = getComputedStyle(panel); const inset = parseFloat(cs.paddingLeft) + parseFloat(cs.borderLeftWidth); const pb = r(panel);
       out.push(['h2 ' + h.textContent.trim().slice(0,22) + ' (in panel)', Math.round(r(h).left*100)/100, Math.round(pb.left*100)/100, 'I', inset]); }
-    else out.push(row('h2 ' + h.textContent.trim().slice(0,22), h, h.closest('.two,.grid,.faq-layout,.doc-grid') ? 'X' : 'L'));
+    else out.push(row('h2 ' + h.textContent.trim().slice(0,22), h, h.closest('.two,.grid,.faq-layout,.doc-grid,.teaser-cards') ? 'X' : 'L'));
   });
   out.push(row('footer logo', d.querySelector('.footer .brand'), 'L'));
   const w = d.querySelector('main .wrap') || d.querySelector('.nav-bar'); const cs = getComputedStyle(w); const wb = r(w);
@@ -68,6 +76,7 @@ def main():
             if "L" in side: checks.append(("left", l, L))
             if "R" in side: checks.append(("right", r, R))
             if "I" in side: checks.append((f"left = panel edge + inset {extra[0]:g}", l, r + extra[0]))
+            if "E" in side: checks.append(("right = panel inner right", l, r))
             flags = ["OK" if v is not None and abs(v - ref) < 0.51 else f"MISMATCH ({v} vs {ref:g})" for _, v, ref in checks]
             ok_all &= all(x == "OK" for x in flags)
             print(f"  {name:<32} left={l!s:<8} right={r!s:<8} {' / '.join(f'{c[0]} {x}' for c, x in zip(checks, flags))}")
