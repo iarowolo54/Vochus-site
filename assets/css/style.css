@@ -180,6 +180,42 @@ body.menu-open{overflow:hidden}
   .hero h1{max-width:none}
 }
 
+/* ---------- 9b. Home hero: full-bleed graded photo, white h1, two product cards hanging over the edge ---------- */
+.hero-home{--overlap:160px;--green-photo:#7ADE97;position:relative;isolation:isolate;display:flex;flex-direction:column;min-height:calc(660px + var(--overlap));padding-top:clamp(48px,5vw,72px);background:var(--canvas)}
+.hero-bg{position:absolute;inset:0 0 var(--overlap) 0;z-index:-1;background:var(--deep);overflow:hidden}
+.hero-bg img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+.hero-body{display:flex;flex-direction:column;flex:1 1 auto;width:100%}
+.hero-home h1{font:600 clamp(40px,4.2vw,60px)/1.15 var(--font-display);letter-spacing:-.03em;color:#fff;max-width:640px}
+.hero-home h1 .hl{color:var(--green-photo)}
+.hero-home .lede{margin-top:var(--s-5);font-size:clamp(17px,1.4vw,20px);line-height:1.5;color:#fff;max-width:460px}
+.hero-cards{display:grid;grid-template-columns:repeat(2,minmax(0,340px));gap:var(--g);justify-content:start;margin-top:auto;padding-top:var(--s-7)}
+.hero-card{display:flex;flex-direction:column;padding:var(--s-6);border:0;border-radius:var(--r-lg);box-shadow:var(--shadow-3)}
+.hero-card h2{margin-top:var(--s-4);font-size:22px;letter-spacing:-.01em}
+.hero-card .hc-fig{margin-top:var(--s-2);font:700 20px/1.3 var(--font-display);letter-spacing:-.01em;color:var(--ink)}
+.hero-card .hc-sub{margin-top:2px;font-size:var(--t-small);color:var(--ink-2)}
+.hero-card .hc-desc{margin-top:var(--s-3);font-size:16px;line-height:1.5;color:var(--ink-2)}
+.hero-card .btn-row{margin-top:auto;padding-top:var(--s-5);flex-direction:column;align-items:stretch}
+.hero-card .btn{width:100%}
+.hero-after{padding-top:var(--s-6)}
+@media (max-width:1023px){
+  .hero-home{--overlap:0px;min-height:0;padding-top:0}
+  .hero-bg{position:relative;inset:auto;aspect-ratio:21/9;z-index:0}
+  .hero-bg img{position:absolute;inset:0;object-position:60% 22%}
+  .hero-body{padding-top:var(--s-6);padding-bottom:var(--s-6)}
+  .hero-home h1{color:var(--ink);max-width:none}
+  .hero-home h1 .hl{color:var(--ink-green)}
+  .hero-home .lede{color:var(--ink-2);max-width:56ch}
+  .hero-cards{grid-template-columns:repeat(2,minmax(0,1fr));padding-top:var(--s-6)}
+  .hero-after{padding-top:0}
+}
+@media (max-width:599px){
+  .hero-bg{aspect-ratio:4/3}
+  .hero-cards{grid-template-columns:1fr}
+}
+.ledger-grid{align-items:start}
+.ledger-grid .section-head{margin-bottom:0}
+@media (min-width:900px){.ledger-grid .section-head{position:sticky;top:calc(var(--nav-h) + var(--s-5))}}
+
 /* ---------- 10. Savings Ledger (§4.1) ---------- */
 .ledger{position:relative}
 .ledger-head{display:block}

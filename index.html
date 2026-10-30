@@ -22,6 +22,8 @@
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/PlusJakartaSans-var-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/Inter-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" type="image/webp" imagesrcset="assets/img/hero-trader-960.webp 960w, assets/img/hero-trader-1376.webp 1376w" imagesizes="100vw" media="(min-width:1024px)" fetchpriority="high">
+<link rel="preload" as="image" type="image/webp" imagesrcset="assets/img/hero-trader-m-640.webp 640w, assets/img/hero-trader-m-956.webp 956w" imagesizes="100vw" media="(max-width:1023px)" fetchpriority="high">
 <link rel="stylesheet" href="assets/css/style.css">
 <script defer src="assets/js/main.js"></script>
 <!-- /head -->
@@ -77,64 +79,44 @@
 
 <main id="main">
 
-<section class="hero" aria-labelledby="hero-h">
-  <div class="wrap hero-grid">
-    <div>
-      <h1 id="hero-h">Save more.<br>Earn 12% <span class="nb">every year.</span></h1>
-      <p class="lede">Open a Vochus Easy Save account in minutes: save daily, weekly or monthly online and earn 12% annual interest on your balance. Secure, transparent, and built for Nigerians.</p>
-      <div class="btn-row">
-        <a class="btn btn-primary" href="https://easysave.vochusglobalservices.co.uk/customer/enroll" data-app="register" rel="noopener">Start Earning Interest<svg class="ico" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
-        <a class="btn btn-secondary" href="how-it-works.html">See How It Works</a>
-      </div>
-    </div>
-
-    <div class="card ledger" id="ledger">
-      <div class="ledger-head">
-        <span class="k">Annual Interest Rate</span>
-        <div class="fig">12<span class="pct">%</span></div>
-        <p class="fn">per annum · online savers only</p>
-      </div>
-      <div class="ledger-rates">
-        <div><span>Per Month</span><strong>1.00%</strong></div>
-        <div><span>Per Quarter</span><strong>3.00%</strong></div>
-        <div><span>Per Half-Year</span><strong>6.00%</strong></div>
-        <div><span>Per Year</span><strong>12.00%</strong></div>
-      </div>
-      <details open>
-        <summary>See the full breakdown<svg class="ico" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary>
-        <form class="ledger-controls" hidden novalidate>
-          <fieldset class="seg">
-            <legend>Savings plan</legend>
-            <div class="seg-row">
-              <button type="button" class="seg-btn" value="daily" aria-pressed="true">Daily</button>
-              <button type="button" class="seg-btn" value="weekly" aria-pressed="false">Weekly</button>
-              <button type="button" class="seg-btn" value="monthly" aria-pressed="false">Monthly</button>
-            </div>
-          </fieldset>
-          <div class="ledger-fields">
-            <div class="field">
-              <label for="lg-amount">Amount per contribution</label>
-              <div class="in"><span class="pre" aria-hidden="true">₦</span><input id="lg-amount" type="text" inputmode="decimal" autocomplete="off" value="500" aria-describedby="lg-error"></div>
-              <span class="err" id="lg-error" aria-live="polite"></span>
-            </div>
-            <div class="field">
-              <label for="lg-duration">Duration</label>
-              <div class="in"><select id="lg-duration"><option>30 days</option></select></div>
-            </div>
-          </div>
-        </form>
-        <dl class="receipt">
-          <div class="rc-row"><dt><span>Plan</span><span class="lead" aria-hidden="true"></span></dt><dd class="txt" data-k="plan">Daily · ₦500 × 30 days</dd></div>
-          <div class="rc-row"><dt><span>Saved</span><span class="lead" aria-hidden="true"></span></dt><dd data-k="saved"><span class="naira">₦</span>15,000</dd></div>
-          <div class="rc-row plus"><dt><span>Interest applied (<span data-k="rate">1%</span>)</span><span class="lead" aria-hidden="true"></span></dt><dd data-k="interest">+<span class="naira">₦</span>150</dd></div>
-          <div class="rc-row total"><dt><span>Payout</span><span class="lead" aria-hidden="true"></span></dt><dd data-k="payout" aria-live="polite"><span class="naira">₦</span>15,150</dd></div>
-        </dl>
-      </details>
+<section class="hero-home" aria-labelledby="hero-h">
+  <picture class="hero-bg">
+    <source media="(max-width:1023px)" type="image/webp" srcset="assets/img/hero-trader-m-640.webp 640w, assets/img/hero-trader-m-956.webp 956w" sizes="100vw">
+    <source media="(max-width:1023px)" srcset="assets/img/hero-trader-m-640.jpg 640w, assets/img/hero-trader-m-956.jpg 956w" sizes="100vw">
+    <source type="image/webp" srcset="assets/img/hero-trader-960.webp 960w, assets/img/hero-trader-1376.webp 1376w" sizes="100vw">
+    <img src="assets/img/hero-trader-1376.jpg" srcset="assets/img/hero-trader-960.jpg 960w, assets/img/hero-trader-1376.jpg 1376w" sizes="100vw" width="1376" height="768" fetchpriority="high" decoding="sync" alt="A trader laughing in the doorway of her shop on a busy Lagos street, phone in hand">
+  </picture>
+  <div class="wrap hero-body">
+    <h1 id="hero-h">Save more.<br>Earn <span class="hl">12%</span> <span class="nb">every year.</span></h1>
+    <p class="lede">Open a Vochus Easy Save account in minutes: save daily, weekly or monthly online and earn 12% annual interest on your balance. Secure, transparent, and built for Nigerians.</p>
+    <div class="hero-cards">
+      <article class="card hero-card">
+        <span class="tile"><svg class="ico" aria-hidden="true"><use href="#i-wallet"/></svg></span>
+        <h2>Vochus Easy Save</h2>
+        <p class="hc-fig">12% p.a. interest</p>
+        <p class="hc-sub">per annum · online savers only</p>
+        <p class="hc-desc">Register, contribute, track your balance and claim your payout entirely from your phone.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="https://easysave.vochusglobalservices.co.uk/customer/enroll" data-app="register" rel="noopener">Start Earning Interest<svg class="ico" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+          <a class="btn btn-secondary" href="how-it-works.html">See How It Works</a>
+        </div>
+      </article>
+      <article class="card hero-card">
+        <span class="tile"><svg class="ico" aria-hidden="true"><use href="#i-briefcase"/></svg></span>
+        <h2>Vochus Agent</h2>
+        <p class="hc-fig">65% commission</p>
+        <p class="hc-sub">every cycle, every member</p>
+        <p class="hc-desc">Join our network of field agents across Nigeria: help people save, and earn 65% of every commission your portfolio generates.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="agent.html">Apply as an Agent<svg class="ico" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+          <a class="btn btn-secondary" href="agent.html">Learn more</a>
+        </div>
+      </article>
     </div>
   </div>
 </section>
 
-<div class="proof">
+<div class="proof hero-after">
   <div class="wrap">
     <ul>
       <li><span class="v">12%</span><span class="l">Annual Interest</span></li>
@@ -196,6 +178,58 @@
       </li>
     </ol>
     <p class="cycle-return"><svg class="ico" aria-hidden="true"><use href="#i-repeat"/></svg>Re-enrol Any Time</p>
+  </div>
+</section>
+
+<section class="section" id="calculator" aria-labelledby="ledger-h">
+  <div class="wrap hero-grid ledger-grid">
+    <div class="section-head">
+      <h2 id="ledger-h">See exactly how your 12% interest grows</h2>
+      <p>Interest is calculated on your total savings at the end of your cycle, prorated for the months you saved, and added to your payout automatically.</p>
+    </div>
+  <div class="card ledger" id="ledger">
+    <div class="ledger-head">
+      <span class="k">Annual Interest Rate</span>
+      <div class="fig">12<span class="pct">%</span></div>
+      <p class="fn">per annum · online savers only</p>
+    </div>
+    <div class="ledger-rates">
+      <div><span>Per Month</span><strong>1.00%</strong></div>
+      <div><span>Per Quarter</span><strong>3.00%</strong></div>
+      <div><span>Per Half-Year</span><strong>6.00%</strong></div>
+      <div><span>Per Year</span><strong>12.00%</strong></div>
+    </div>
+    <details open>
+      <summary>See the full breakdown<svg class="ico" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary>
+      <form class="ledger-controls" hidden novalidate>
+        <fieldset class="seg">
+          <legend>Savings plan</legend>
+          <div class="seg-row">
+            <button type="button" class="seg-btn" value="daily" aria-pressed="true">Daily</button>
+            <button type="button" class="seg-btn" value="weekly" aria-pressed="false">Weekly</button>
+            <button type="button" class="seg-btn" value="monthly" aria-pressed="false">Monthly</button>
+          </div>
+        </fieldset>
+        <div class="ledger-fields">
+          <div class="field">
+            <label for="lg-amount">Amount per contribution</label>
+            <div class="in"><span class="pre" aria-hidden="true">₦</span><input id="lg-amount" type="text" inputmode="decimal" autocomplete="off" value="500" aria-describedby="lg-error"></div>
+            <span class="err" id="lg-error" aria-live="polite"></span>
+          </div>
+          <div class="field">
+            <label for="lg-duration">Duration</label>
+            <div class="in"><select id="lg-duration"><option>30 days</option></select></div>
+          </div>
+        </div>
+      </form>
+      <dl class="receipt">
+        <div class="rc-row"><dt><span>Plan</span><span class="lead" aria-hidden="true"></span></dt><dd class="txt" data-k="plan">Daily · ₦500 × 30 days</dd></div>
+        <div class="rc-row"><dt><span>Saved</span><span class="lead" aria-hidden="true"></span></dt><dd data-k="saved"><span class="naira">₦</span>15,000</dd></div>
+        <div class="rc-row plus"><dt><span>Interest applied (<span data-k="rate">1%</span>)</span><span class="lead" aria-hidden="true"></span></dt><dd data-k="interest">+<span class="naira">₦</span>150</dd></div>
+        <div class="rc-row total"><dt><span>Payout</span><span class="lead" aria-hidden="true"></span></dt><dd data-k="payout" aria-live="polite"><span class="naira">₦</span>15,150</dd></div>
+      </dl>
+    </details>
+  </div>
   </div>
 </section>
 
