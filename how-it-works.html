@@ -198,6 +198,59 @@
   </div>
 </section>
 
+<section class="section" id="calculator" aria-labelledby="ledger-h">
+  <div class="wrap hero-grid ledger-grid">
+    <div class="section-head">
+      <h2 id="ledger-h">See exactly how your <span class="hl">12% interest</span> grows</h2>
+      <p>Interest is calculated on your total savings at the end of your cycle, prorated for the months you saved, and added to your payout automatically.</p>
+      <a class="btn-ghost" href="interest.html">See examples<svg class="ico ico-sm" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+    </div>
+  <div class="card ledger" id="ledger">
+    <div class="ledger-head">
+      <span class="k">Annual Interest Rate</span>
+      <div class="fig">12<span class="pct">%</span></div>
+      <p class="fn">per annum · online savers only</p>
+    </div>
+    <div class="ledger-rates">
+      <div><span>Per Month</span><strong>1.00%</strong></div>
+      <div><span>Per Quarter</span><strong>3.00%</strong></div>
+      <div><span>Per Half-Year</span><strong>6.00%</strong></div>
+      <div><span>Per Year</span><strong>12.00%</strong></div>
+    </div>
+    <details open>
+      <summary>See the full breakdown<svg class="ico" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary>
+      <form class="ledger-controls" hidden novalidate>
+        <fieldset class="seg">
+          <legend>Savings plan</legend>
+          <div class="seg-row">
+            <button type="button" class="seg-btn" value="daily" aria-pressed="true">Daily</button>
+            <button type="button" class="seg-btn" value="weekly" aria-pressed="false">Weekly</button>
+            <button type="button" class="seg-btn" value="monthly" aria-pressed="false">Monthly</button>
+          </div>
+        </fieldset>
+        <div class="ledger-fields">
+          <div class="field">
+            <label for="lg-amount">Amount per contribution</label>
+            <div class="in"><span class="pre" aria-hidden="true">₦</span><input id="lg-amount" type="text" inputmode="decimal" autocomplete="off" value="500" aria-describedby="lg-error"></div>
+            <span class="err" id="lg-error" aria-live="polite"></span>
+          </div>
+          <div class="field">
+            <label for="lg-duration">Duration</label>
+            <div class="in"><select id="lg-duration"><option>30 days</option></select></div>
+          </div>
+        </div>
+      </form>
+      <dl class="receipt">
+        <div class="rc-row"><dt><span>Plan</span><span class="lead" aria-hidden="true"></span></dt><dd class="txt" data-k="plan">Daily · ₦500 × 30 days</dd></div>
+        <div class="rc-row"><dt><span>Saved</span><span class="lead" aria-hidden="true"></span></dt><dd data-k="saved"><span class="naira">₦</span>15,000</dd></div>
+        <div class="rc-row plus"><dt><span>Interest applied (<span data-k="rate">1%</span>)</span><span class="lead" aria-hidden="true"></span></dt><dd data-k="interest">+<span class="naira">₦</span>150</dd></div>
+        <div class="rc-row total"><dt><span>Payout</span><span class="lead" aria-hidden="true"></span></dt><dd data-k="payout" aria-live="polite"><span class="naira">₦</span>15,150</dd></div>
+      </dl>
+    </details>
+  </div>
+  </div>
+</section>
+
 <section class="section" aria-labelledby="cta-h">
   <div class="wrap">
     <div class="cta-strip">
