@@ -143,7 +143,7 @@
           <div class="field"><label for="ag-first">First name</label><input id="ag-first" name="first" type="text" autocomplete="given-name" maxlength="100" required><span class="err" id="ag-first-err" aria-live="polite"></span></div>
           <div class="field"><label for="ag-last">Last name</label><input id="ag-last" name="last" type="text" autocomplete="family-name" maxlength="100" required><span class="err" id="ag-last-err" aria-live="polite"></span></div>
         </div>
-        <div class="field"><label for="ag-phone">Phone number</label><input id="ag-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="e.g. 0803 123 4567" pattern="[0-9+\s\-()]{{7,30}}" maxlength="30" required><span class="err" id="ag-phone-err" aria-live="polite"></span></div>
+        <div class="field"><label for="ag-phone">Phone number</label><input id="ag-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="e.g. 0803 123 4567" pattern="[0-9+\s\-\(\)]{7,30}" maxlength="30" required><span class="err" id="ag-phone-err" aria-live="polite"></span></div>
         <div class="field"><label for="ag-email">Email address</label><input id="ag-email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" required><span class="err" id="ag-email-err" aria-live="polite"></span></div>
         <div class="field"><label for="ag-msg">Message</label><textarea id="ag-msg" name="message" rows="4" maxlength="3000" placeholder="Where are you based, and why would you like to be a Vochus agent?" required></textarea><span class="err" id="ag-msg-err" aria-live="polite"></span></div>
         <p class="help">We'll reply to the email address you give us.</p>
