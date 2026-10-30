@@ -24,7 +24,7 @@ JS = r"""
   const out = { scrollWidth: d.documentElement.scrollWidth, width: W, tap: [], contrast: [], small: [], overflow: [] };
   if (out.scrollWidth > W) d.querySelectorAll('body *').forEach(e => { const r = e.getBoundingClientRect(); if (r.right > W + 0.5 && r.width > 0 && !e.closest('.sheet,.menu') && out.overflow.length < 12) out.overflow.push(`${e.tagName.toLowerCase()}.${(e.className||'').toString().split(' ')[0]} right=${Math.round(r.right)} w=${Math.round(r.width)}`); });
   d.querySelectorAll('a[href],button,summary,input,select').forEach(e => {
-    if (!vis(e)) return;
+    if (!vis(e) || e.closest('[aria-hidden="true"]')) return;   // honeypot and other hidden-from-AT controls
     let r = e.getBoundingClientRect();
     const ps = w.getComputedStyle(e, '::after');   // absolute ::after boxes extend the hit area
     if (ps.position === 'absolute' && ps.content !== 'none' && parseFloat(ps.height) >= 24) { /* a thin underline pseudo does not change the hit box */ const t = parseFloat(ps.top)||0, b = parseFloat(ps.bottom)||0, l = parseFloat(ps.left)||0, rr = parseFloat(ps.right)||0; r = { width: r.width - l - rr, height: r.height - t - b }; }
