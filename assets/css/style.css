@@ -18,6 +18,9 @@
   --shadow-2:0 1px 2px rgba(15,42,29,.06),0 4px 12px rgba(15,42,29,.06);
   --shadow-3:0 2px 4px rgba(15,42,29,.06),0 12px 32px rgba(15,42,29,.10);
   --ease:cubic-bezier(.2,.7,.2,1);--t-fast:120ms;--t-base:200ms;
+  --d-micro:120ms;--d-hover:200ms;--d-enter:320ms;--d-slow:600ms;--d-hero:900ms;
+  --ease-out:cubic-bezier(.2,.8,.2,1);--ease-in-out:cubic-bezier(.65,0,.35,1);--ease-spring:cubic-bezier(.34,1.3,.64,1);
+  --shadow-4:0 4px 8px rgba(15,42,29,.08),0 20px 48px rgba(15,42,29,.14);
   --t-display:clamp(34px,4.6vw,56px);--t-h1:clamp(30px,3.8vw,44px);--t-h2:clamp(24px,2.6vw,32px);
   --t-h3:19px;--t-body:17px;--t-small:14px;
   --nav-h:64px;
@@ -128,8 +131,8 @@ a.card:hover .more .ico{transform:translateX(2px)}
 @media (max-width:399px){.card-quiet{padding:20px}}
 
 /* ---------- 8. Navigation ---------- */
-.nav{position:sticky;top:0;z-index:50;background:var(--surface);border-bottom:1px solid var(--line);transition:box-shadow var(--t-base)}
-.nav.is-scrolled{box-shadow:var(--shadow-1)}
+.nav{position:sticky;top:0;z-index:50;background:var(--surface);border-bottom:1px solid transparent;transition:box-shadow var(--d-hover) var(--ease-out),border-color var(--d-hover) var(--ease-out)}
+.nav.is-scrolled,.no-js .nav{border-bottom-color:var(--line);box-shadow:var(--shadow-2)}
 .nav-bar{height:var(--nav-h);display:flex;align-items:center;gap:var(--s-4)}
 @media (min-width:1024px){.nav .wrap{max-width:1480px;padding-inline:20px}}  /* header container: 1440px + 20px sides, logo hugs left, auth hugs right */
 .brand{display:inline-flex;align-items:center;gap:10px;min-height:44px;color:var(--ink);text-decoration:none;font:600 16px/1 var(--font-display);letter-spacing:-.01em;flex:none}
@@ -277,8 +280,8 @@ body.menu-open{overflow:hidden}
 .rc-row.total dt{color:var(--ink);font-weight:600;font-size:16px}
 .rc-row.total dd{font-family:var(--font-display);font-weight:700;font-size:28px;letter-spacing:-.025em;line-height:1}
 .rc-row.total dd .naira{font-size:.7em}
-.rc-row.flash dd{animation:flash var(--t-base) var(--ease)}
-@keyframes flash{from{background:var(--tint)}to{background:transparent}}
+.rc-row.flash dd{animation:flash 150ms var(--ease-out)}
+@keyframes flash{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 .ledger-note{margin-top:var(--s-3);font-size:var(--t-small);color:var(--ink-2)}
 
 /* ---------- 11. Proof band: four big brand-green numerals, centred captions ---------- */
@@ -992,6 +995,86 @@ h2.h3{font-size:var(--t-h3);letter-spacing:-.01em;line-height:1.3}
 .endorse p{padding-left:var(--s-5);border-left:1px solid var(--line-strong);font-size:16px;line-height:1.5;color:var(--ink-2);max-width:40ch}
 .endorse b{color:var(--ink);font-weight:600}
 @media (max-width:399px){.endorse{gap:var(--s-4)}.endorse img{width:80px}.endorse p{padding-left:var(--s-4);font-size:15px}}
+
+
+/* ---------- 39. Motion: tokens above; everything here moves transform/opacity only and is removed under reduced motion ---------- */
+.ln{display:block}
+.hero-home h1 .hl{position:relative}
+.hero-home h1 .hl::after{content:"";position:absolute;left:.02em;right:.04em;bottom:.04em;height:.07em;border-radius:2px;background:currentColor;opacity:.9;transform:scaleX(0);transform-origin:left}
+@media (prefers-reduced-motion:no-preference){
+  /* 1. hero entrance (CSS only, so it never depends on JS and never hides content for long) */
+  @keyframes rise{from{opacity:0;transform:translateY(var(--rise,16px))}to{opacity:1;transform:none}}
+  @keyframes hero-photo{from{opacity:.72;transform:scale(1.04)}to{opacity:1;transform:none}}
+  @keyframes draw{to{transform:scaleX(1)}}
+  @keyframes pop{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:none}}
+  .hero-home .hero-bg img{animation:hero-photo var(--d-hero) var(--ease-out) backwards}
+  .hero-home h1 .ln{--rise:12px;animation:rise 560ms var(--ease-out) backwards;animation-delay:120ms}
+  .hero-home h1 .ln+.ln{animation-delay:200ms}
+  .hero-home h1 .hl::after{animation:draw var(--d-enter) var(--ease-out) 640ms both}
+  .hero-home .lede{animation:rise 560ms var(--ease-out) 360ms backwards}
+  .hero-home .hero-card{animation:rise 560ms var(--ease-out) backwards;animation-delay:520ms}
+  .hero-home .hero-card+.hero-card{animation-delay:600ms}
+  /* 9. inner-page hero panels: simpler version of the same */
+  .hero-panel .hero-inner>*{animation:rise 480ms var(--ease-out) backwards}
+  .hero-panel .hero-inner>:nth-child(2){animation-delay:80ms}
+  .hero-panel .hero-inner>:nth-child(3){animation-delay:160ms}
+  .hero-panel .hero-inner>:nth-child(4){animation-delay:240ms}
+  .hero-panel .vcard{animation:rise 560ms var(--ease-out) 240ms backwards}
+  /* 2. scroll reveals: JS adds .rv only to elements below the first viewport, then .rv-in when they enter */
+  .rv{opacity:0;transform:translateY(20px)}
+  .rv.rv-in{opacity:1;transform:none;transition:opacity var(--d-enter) var(--ease-out),transform 480ms var(--ease-out);transition-delay:calc(var(--i,0) * 70ms)}
+  .stage.rv .chip{opacity:0;transform:scale(.8)}
+  .stage.rv-in .chip{opacity:1;transform:none;transition:opacity var(--d-hover) var(--ease-out),transform var(--d-enter) var(--ease-spring);transition-delay:calc(var(--i,0) * 70ms + 380ms)}
+  /* 4. path timeline: the hairline draws down and the dots fill in sequence once the card reveals */
+  .path.rv .steps-tl li::after{transform:scaleY(0);transform-origin:top}
+  .path.rv .steps-tl li::before{transform:scale(0)}
+  .path.rv-in .steps-tl li::after{transform:none;transition:transform 360ms var(--ease-out)}
+  .path.rv-in .steps-tl li::before{transform:none;transition:transform var(--d-enter) var(--ease-spring)}
+  .path.rv-in .steps-tl li:nth-child(1)::before{transition-delay:calc(var(--i,0) * 70ms + 300ms)}
+  .path.rv-in .steps-tl li:nth-child(1)::after{transition-delay:calc(var(--i,0) * 70ms + 400ms)}
+  .path.rv-in .steps-tl li:nth-child(2)::before{transition-delay:calc(var(--i,0) * 70ms + 640ms)}
+  .path.rv-in .steps-tl li:nth-child(2)::after{transition-delay:calc(var(--i,0) * 70ms + 740ms)}
+  .path.rv-in .steps-tl li:nth-child(3)::before{transition-delay:calc(var(--i,0) * 70ms + 980ms)}
+  /* 6. mobile menu: fade + 8px slide, links stagger in */
+  .sheet.is-open li,.sheet:target li{animation:rise 320ms var(--ease-out) backwards;--rise:8px}
+  .sheet li:nth-child(2){animation-delay:40ms}.sheet li:nth-child(3){animation-delay:80ms}.sheet li:nth-child(4){animation-delay:120ms}.sheet li:nth-child(5){animation-delay:160ms}.sheet li:nth-child(6){animation-delay:200ms}
+  /* transitions used by the hover/focus rules below */
+  .card,.hero-card,.app-panel,.vcard{transition:transform var(--d-hover) var(--ease-out),box-shadow var(--d-hover) var(--ease-out),border-color var(--d-hover) var(--ease-out)}
+  .btn{transition:background-color var(--d-hover) var(--ease-out),border-color var(--d-hover) var(--ease-out),color var(--d-hover) var(--ease-out),transform var(--d-hover) var(--ease-spring),box-shadow var(--d-hover) var(--ease-out)}
+  .btn .ico,.btn-ghost .ico,a.card .more .ico,.option .chev,.footer-apps .btn .ico,.link-row a .ico{transition:transform var(--d-hover) var(--ease-out)}
+  .photo img,.auth-photo img{transition:transform var(--d-slow) var(--ease-out)}
+  .option .tile{transition:background-color var(--d-hover) var(--ease-out),color var(--d-hover) var(--ease-out)}
+  .faq{interpolate-size:allow-keywords}
+  .faq::details-content{block-size:0;overflow:clip;transition:block-size var(--d-enter) var(--ease-out),content-visibility var(--d-enter) allow-discrete}
+  .faq[open]::details-content{block-size:auto}
+  .footer-info::details-content{block-size:0;overflow:clip;transition:block-size var(--d-enter) var(--ease-out),content-visibility var(--d-enter) allow-discrete}
+  .footer-info{interpolate-size:allow-keywords}
+  .footer-info[open]::details-content{block-size:auto}
+}
+@media (prefers-reduced-motion:reduce){
+  .hero-home h1 .hl::after{transform:scaleX(1)}
+  .rv,.rv .chip{opacity:1;transform:none}
+}
+/* text links: the arrow nudges and an underline draws from the left */
+.btn-ghost,a.card .more{position:relative}
+.btn-ghost::after,a.card .more::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform var(--d-hover) var(--ease-out)}
+.btn-ghost:hover,.btn-ghost:focus-visible{text-decoration:none}
+.btn-ghost:hover::after,.btn-ghost:focus-visible::after,a.card:hover .more::after,a.card:focus-visible .more::after{transform:scaleX(1)}
+.btn-ghost:hover .ico,.btn-ghost:focus-visible .ico,.btn:hover .ico,.btn:focus-visible .ico,.link-row a:hover .ico{transform:translateX(3px)}
+.btn:active{transform:scale(.98)}
+.btn-outline:focus-visible{outline-color:#fff}
+.footer-apps .btn:hover .ico,.footer-apps .btn:focus-visible .ico{transform:translateY(2px)}
+.option:hover .tile,.option:focus-visible .tile{background:var(--ink-green);color:#fff}
+.option:hover .chev,.option:focus-visible .chev{color:var(--ink-green);transform:translate(2px,-2px)}
+.nav-links a:hover::after,.nav-links a:focus-visible::after{transform:scaleX(1)}
+@media (hover:hover){
+  .card.product:hover,.card.tplan:hover,.hero-card:hover,.card.plan:hover,.card.path:hover,.app-panel:hover,.card.step-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-4)}
+  .card.product:hover,.card.tplan:hover,.card.plan:hover,.card.step-card:hover{border-color:var(--tint-2)}
+  a.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-3)}
+  .btn-primary:hover{box-shadow:var(--shadow-2)}
+  figure:hover .photo img,.auth-photo:hover img{transform:scale(1.03)}
+}
+.card.product:focus-within,.card.tplan:focus-within,.hero-card:focus-within,.card.plan:focus-within{box-shadow:var(--shadow-4)}
 
 /* ---------- 24. Utilities ---------- */
 .muted{color:var(--ink-2)}
