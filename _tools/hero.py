@@ -79,6 +79,8 @@ def main():
     # phones: ungraded trader crop, same framing as before (x 840..2752 = 1912x1536)
     crop = src.crop((840, 0, 2752, 1536))
     export(crop, "hero-trader-m", [1280, 956, 640])
+    # auth pages: portrait crop of the trader (3:4, face in the upper third), ungraded
+    export(src.crop((1500, 0, 2500, 1333)), "auth-trader", [900, 600])
     # sharpness check: edge energy of the 1920 export vs a 1920 downscale of the raw source
     a = graded.resize((1920, 1072), Image.LANCZOS).convert("L").filter(ImageFilter.FIND_EDGES)
     from PIL import ImageStat
