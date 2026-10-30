@@ -1083,6 +1083,7 @@ h2.h3{font-size:var(--t-h3);letter-spacing:-.01em;line-height:1.3}
 .form-alert a{font-weight:600}
 .form .field.is-invalid input,.form .field.is-invalid select,.form .field.is-invalid textarea{border-color:var(--danger);box-shadow:inset 0 0 0 1px var(--danger)}
 .form-done{padding:var(--s-5) 0}
+.form-done:focus-visible{outline:none}
 .form-done h3{font-size:var(--t-h3)}
 .form-done p{margin-top:var(--s-2);color:var(--ink-2);font-size:16px}
 .form-done .again{margin-top:var(--s-4)}
