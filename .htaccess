@@ -1,4 +1,4 @@
-# Vochus Easy Save marketing site (static HTML + send.php) on Apache (DirectAdmin / CloudLinux).
+# Vochus Easy Save marketing site (static HTML + send.php) on LiteSpeed/Apache (GO54 DirectAdmin, CloudLinux).
 # Upload this only after the stub Node.js app has been removed in DirectAdmin, so no Passenger* lines remain. See _docs/DEPLOY.md.
 Options -Indexes
 ErrorDocument 404 /404.html
@@ -15,7 +15,13 @@ DirectoryIndex index.html
 
 # Never serve the form config, data files or dotfiles
 <FilesMatch "^(send-config\.php|.*\.json|\.(?!well-known).*)$">
-  Require all denied
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
 </FilesMatch>
 
 <IfModule mod_headers.c>

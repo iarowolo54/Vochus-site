@@ -18,8 +18,12 @@ whoever does the upload.
 Today `public_html` holds a GO54 parking page and a stub Node.js (Passenger) app. Its `.htaccess` sends every unknown
 URL to that stub, which would hide our 404 page and could interfere with `send.php`.
 
-1. DirectAdmin → **Setup Node.js App**. If an application is listed for vochuseasysave.com, **Stop** it, then **Delete** it.
-   Deleting it removes the Passenger lines from `.htaccess`.
+1. DirectAdmin → **Setup Node.js App**. The listed app has application root `vochuseasysave`
+   (`~/vochuseasysave`, startup file `server.js`, Node 22). It is GO54's sample app that prints
+   "It works! NodeJS" and is not the Vochus app (that runs on easysave.vochusglobalservices.co.uk). **Stop** it,
+   then **Delete** it. Deleting it removes the two `# DO NOT REMOVE. CLOUDLINUX …` blocks from `.htaccess`; that is
+   expected (they say "do not remove" only because they must not be hand-edited while the app exists).
+   Optional afterwards: delete the leftover `~/vochuseasysave` folder.
 2. DirectAdmin → **File Manager** → `domains/vochuseasysave.com/public_html`. Open `.htaccess` (enable "show hidden
    files" if needed). It must contain **no** lines starting with `Passenger` or `PassengerAppRoot`. If it still does,
    delete the whole `.htaccess` file. Ours replaces it in the next step.
