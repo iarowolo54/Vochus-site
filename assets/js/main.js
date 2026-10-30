@@ -174,6 +174,48 @@
     addEventListener('scroll', pick, { passive: true }); addEventListener('resize', pick); pick();
   }
 
+  /* ---- Motion: scroll reveals (only for content below the first viewport) and the proof count-up.
+         Nothing here hides content unless this code runs, and it does nothing under reduced motion. ---- */
+  if (!reduce.matches && 'IntersectionObserver' in window) {
+    root.classList.add('js-motion');
+    var rvSel = '.section-head, .ftext, .stage, main .card:not(.hero-card):not(.auth-card), .trow li, .proof li, .app-panel, .about-zw, .cta-strip, .editorial figure, .endorse, .trust, .need, .card-quiet';
+    var rvs = $$(rvSel).filter(function (el) { return !el.closest('.hero-home, .hero-panel, .auth') && el.getBoundingClientRect().top > innerHeight; });
+    rvs.forEach(function (el) {
+      var i = 0, p = el.previousElementSibling;
+      while (p) { if (p.classList.contains('rv')) i++; p = p.previousElementSibling; }
+      el.style.setProperty('--i', String(Math.min(i, 5))); el.classList.add('rv');
+    });
+    var rio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('rv-in'); rio.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    rvs.forEach(function (el) { rio.observe(el); });
+    /* once revealed, drop the reveal classes so hover transitions run at their own speed */
+    d.addEventListener('transitionend', function (e) { var t = e.target; if (e.propertyName === 'transform' && t.classList && t.classList.contains('rv-in') && !t.closest('.path')) { t.classList.remove('rv', 'rv-in'); } });
+    setTimeout(function () { rvs.forEach(function (el) { el.classList.add('rv-in'); }); }, 6000);   /* never leave content hidden */
+    /* proof numerals count up once, in tabular figures; the real text is restored exactly at the end */
+    var vals = $$('.proof .v');
+    if (vals.length) {
+      var pio = new IntersectionObserver(function (es) {
+        if (!es.some(function (e) { return e.isIntersecting; })) return;
+        pio.disconnect();
+        vals.forEach(function (v) {
+          var node = null; v.childNodes.forEach(function (n) { if (n.nodeType === 3 && /\d/.test(n.textContent) && !node) node = n; });
+          if (!node) return;
+          var txt = node.textContent, m = txt.match(/\d+/), target = Number(m[0]), t0 = null;
+          v.setAttribute('aria-label', v.textContent.trim());
+          var step = function (ts) {
+            if (t0 === null) t0 = ts;
+            var k = Math.min(1, (ts - t0) / 900); k = 1 - Math.pow(1 - k, 3);
+            node.textContent = txt.replace(m[0], String(Math.round(target * k)));
+            if (k < 1) requestAnimationFrame(step); else { node.textContent = txt; v.removeAttribute('aria-label'); }
+          };
+          requestAnimationFrame(step);
+        });
+      }, { threshold: 0.4 });
+      pio.observe(vals[0].closest('.proof') || vals[0]);
+    }
+  }
+
   /* ---- FAQ filter (used on faq.html) ---- */
   var q = $('#faq-q');
   if (q) {
