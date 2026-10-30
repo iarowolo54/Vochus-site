@@ -2,3 +2,4 @@ dist/
 ../vochus-data/
 __pycache__/
 .DS_Store
+_qa/

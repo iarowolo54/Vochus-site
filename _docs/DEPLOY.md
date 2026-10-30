@@ -1,7 +1,7 @@
 # Deploying the Vochus Easy Save website (DirectAdmin, GO54 hosting)
 
 The site is static HTML plus one PHP file (`send.php`) that emails the Contact and Agent-application forms to
-info@vochuseasysave.com. Everything below is done in the DirectAdmin panel (your GO54 DirectAdmin panel) and takes about
+info@vochuseasysave.com. Everything below is done in your GO54 DirectAdmin panel and takes about
 20 minutes. No developer tools are needed.
 
 ## 0. Build the package (developer step)
