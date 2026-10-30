@@ -617,7 +617,7 @@ h2.h3{font-size:var(--t-h3);letter-spacing:-.01em;line-height:1.3}
 .search-row label{font-size:var(--t-small);font-weight:500;color:var(--ink-2)}
 .center{text-align:center}
 .center .section-head h1,.center .section-head h2,.center .section-head p{margin-inline:auto}
-@media (max-width:899px){.faq-layout{grid-template-columns:1fr;gap:var(--s-6)}.rail{position:static}.rail ul{display:flex;flex-wrap:wrap;gap:var(--s-2)}.rail a{margin-left:0;border:1px solid var(--line-strong);border-radius:var(--r-pill);background:var(--surface);padding:0 var(--s-4);font-size:14px}.rail a.is-active{border-color:var(--ink-green)}.rail h4{display:none}}
+@media (max-width:899px){.faq-layout{grid-template-columns:minmax(0,1fr);gap:var(--s-5)}.rail{position:static;min-width:0;max-width:100%}.rail ul{display:flex;flex-wrap:nowrap;gap:var(--s-2);overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;scroll-padding-inline:var(--gutter);margin-inline:calc(-1 * var(--gutter));padding:2px var(--gutter) 6px;scrollbar-width:none}.rail ul::-webkit-scrollbar{display:none}.rail a{flex:none;white-space:nowrap;scroll-snap-align:start;margin-left:0;border:1px solid var(--line-strong);border-radius:var(--r-pill);background:var(--surface);padding:0 var(--s-4);font-size:14px}.rail a.is-active{border-color:var(--ink-green)}.rail h4{display:none}}
 
 /* ---------- 32. Contact ---------- */
 .contact-left{display:flex;flex-direction:column;gap:var(--s-5)}
