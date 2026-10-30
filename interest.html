@@ -26,7 +26,7 @@
 </head>
 <body>
 <!-- sprite -->
-<svg xmlns="http://www.w3.org/2000/svg" hidden aria-hidden="true"><symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></symbol><symbol id="i-menu" viewBox="0 0 24 24"><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></symbol></svg>
+<svg xmlns="http://www.w3.org/2000/svg" hidden aria-hidden="true"><symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></symbol><symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" /></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" /></symbol><symbol id="i-menu" viewBox="0 0 24 24"><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></symbol></svg>
 <!-- /sprite -->
 <!-- nav -->
 <a class="skip" href="#main">Skip to content</a>
@@ -75,15 +75,29 @@
 
 <main id="main">
 
-<section class="hero hero-page" aria-labelledby="hero-h">
-  <div class="wrap hero-grid">
-    <div class="hero-inner">
-      <h1 id="hero-h">Your savings work harder with Vochus</h1>
-      <p class="lede">Interest is calculated on your total savings at the end of your cycle, prorated for the months you saved, and added to your payout automatically.</p>
-    </div>
-    <div class="rate" aria-describedby="rate-note">
-      <div class="fig">12<span class="pct">%</span></div>
-      <p class="fn" id="rate-note">per annum · online savers only</p>
+<section class="hero has-panel" aria-labelledby="hero-h">
+  <div class="wrap">
+    <div class="hero-panel">
+      <div class="hero-inner">
+        <h1 id="hero-h">Your savings work harder with Vochus</h1>
+        <p class="lede">Interest is calculated on your total savings at the end of your cycle, prorated for the months you saved, and added to your payout automatically.</p>
+        <div class="btn-row">
+          <a class="btn btn-light" href="https://easysave.vochusglobalservices.co.uk/customer/enroll" data-app="register" rel="noopener">Start Earning 12% Today<svg class="ico" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+          <a class="btn btn-outline" href="plans.html">See plans</a>
+        </div>
+        <p class="note" id="rate-note"><b>12% p.a. interest</b> · per annum · online savers only</p>
+      </div>
+      <div class="vcard" aria-hidden="true">
+        <span class="k">Annual Interest Rate</span>
+        <div class="fig">12<span class="pct">%</span></div>
+        <p class="fn">per annum · online savers only</p>
+        <div class="ledger-rates">
+          <div><span>Per Month</span><strong>1.00%</strong></div>
+          <div><span>Per Quarter</span><strong>3.00%</strong></div>
+          <div><span>Per Half-Year</span><strong>6.00%</strong></div>
+          <div><span>Per Year</span><strong>12.00%</strong></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -157,11 +171,10 @@
 
 <section class="section" aria-labelledby="cta-h">
   <div class="wrap">
-    <div class="cta">
+    <div class="cta-strip">
       <h2 id="cta-h">Save more. Earn 12% every year.</h2>
-      <p>Open a Vochus Easy Save account in minutes: save daily, weekly or monthly online and earn 12% annual interest on your balance.</p>
       <div class="btn-row">
-        <a class="btn btn-primary" href="https://easysave.vochusglobalservices.co.uk/customer/enroll" data-app="register" rel="noopener">Start Earning 12% Today<svg class="ico" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+        <a class="btn btn-outline" href="https://easysave.vochusglobalservices.co.uk/customer/enroll" data-app="register" rel="noopener">Start Earning 12% Today<svg class="ico" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
       </div>
     </div>
   </div>
@@ -170,53 +183,78 @@
 </main>
 <!-- footer -->
 <footer class="footer">
-  <div class="wrap">
-    <div class="footer-top">
-      <a class="brand" href="index.html"><img src="assets/img/logo.svg" alt="" width="28" height="24"><span>Vochus Easy Save</span></a>
-      <p>Nigeria's digital savings platform: save daily, weekly or monthly online and earn 12% annual interest. Secure, transparent, and built for Nigerians.</p>
+  <div class="footer-deep">
+    <div class="wrap">
+      <div class="footer-top">
+        <a class="brand" href="index.html"><img src="assets/img/logo-white.svg" alt="" width="28" height="24"><span>Vochus Easy Save</span></a>
+        <p>Nigeria's digital savings platform: save daily, weekly or monthly online and earn 12% annual interest. Secure, transparent, and built for Nigerians.</p>
+      </div>
+      <nav class="footer-cols" aria-label="Footer">
+        <div>
+          <h4>Product</h4>
+          <ul>
+            <li><a href="plans.html">Savings Plans</a></li>
+            <li><a href="interest.html">Interest</a></li>
+            <li><a href="how-it-works.html">How It Works</a></li>
+            <li><a href="benefits.html">Benefits</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>For Agents</h4>
+          <ul>
+            <li><a href="agent.html">Become an Agent</a></li>
+            <li><a href="agent.html#starter-pack">Starter Pack</a></li>
+            <li><a href="agent.html#commission">65% Commission</a></li>
+            <li><a href="https://easysave.vochusglobalservices.co.uk/" data-app="agent_login" rel="noopener">Agent Portal</a></li>
+            <li><a href="faq.html#agents">Agent FAQs</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Support</h4>
+          <ul>
+            <li><a href="portal.html">Customer Portal</a></li>
+            <li><a href="faq.html">FAQs</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <address>
+            <a href="mailto:info@vochuseasysave.com">info@vochuseasysave.com</a>
+            <a href="tel:+2348033948570">+234 803 394 8570</a>
+            <a href="tel:+2347016634230">+234 701 663 4230</a>
+          </address>
+        </div>
+      </nav>
     </div>
-    <nav class="footer-cols" aria-label="Footer">
-      <div>
-        <h4>Product</h4>
-        <ul>
-          <li><a href="plans.html">Savings Plans</a></li>
-          <li><a href="interest.html">Interest</a></li>
-          <li><a href="how-it-works.html">How It Works</a></li>
-          <li><a href="benefits.html">Benefits</a></li>
-        </ul>
+  </div>
+  <div class="footer-strip">
+    <div class="wrap">
+      <div class="footer-row">
+        <a class="brand" href="index.html"><img src="assets/img/logo.svg" alt="" width="28" height="24"><span>Vochus Easy Save</span></a>
+        <div class="footer-apps">
+          <span class="lbl">Android apps</span>
+          <a class="btn btn-secondary btn-sm" href="https://easysave.vochusglobalservices.co.uk/downloads/easysave-customer.apk" data-app="apk_customer" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-download"/></svg>Vochus Easy Save <span class="muted">APK</span></a>
+          <a class="btn btn-secondary btn-sm" href="https://easysave.vochusglobalservices.co.uk/downloads/easysave-agent.apk" data-app="apk_agent" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-download"/></svg>Vochus Agent <span class="muted">APK</span></a>
+        </div>
       </div>
-      <div>
-        <h4>For Agents</h4>
-        <ul>
-          <li><a href="agent.html">Become an Agent</a></li>
-          <li><a href="agent.html#starter-pack">Starter Pack</a></li>
-          <li><a href="agent.html#commission">65% Commission</a></li>
-          <li><a href="https://easysave.vochusglobalservices.co.uk/" data-app="agent_login" rel="noopener">Agent Portal</a></li>
-          <li><a href="faq.html#agents">Agent FAQs</a></li>
-        </ul>
+      <details class="footer-info">
+        <summary>Important information<svg class="ico ico-sm" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary>
+        <div class="body">
+          <p>12% p.a. interest: per annum · online savers only. Interest is calculated on your total savings at the end of your cycle, prorated for the months you saved, and added to your payout automatically. Applies to online contributions via the Customer Portal. Ask your agent about eligibility.</p>
+          <p>Group Savings: Community payout. Everyone contributes the same amount each cycle. One person receives the full pool, rotating until every member has been paid out.</p>
+          <p>Android only. Allow installs from your browser when Android asks. Each app is about 46 MB.</p>
+          <p>Never share your password or one-time codes with anyone, including Vochus staff or agents.</p>
+        </div>
+      </details>
+      <div class="footer-legal">
+        <address class="co">Vochus Global Services Ltd · 286, Ikorodu Road, Anthony, Lagos, Nigeria</address>
+        <span>© 2026 Vochus Global Services Ltd. All rights reserved.</span>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="contact.html">Contact</a>
+        <a href="https://vochuseasysave.com/">www.vochuseasysave.com</a>
       </div>
-      <div>
-        <h4>Support</h4>
-        <ul>
-          <li><a href="portal.html">Customer Portal</a></li>
-          <li><a href="faq.html">FAQs</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="privacy.html">Privacy Policy</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Contact</h4>
-        <address>
-          Vochus Global Services Ltd<br>Nigeria<br>286, Ikorodu Road, Anthony, Lagos, Nigeria<br>
-          <a href="mailto:info@vochuseasysave.com">info@vochuseasysave.com</a><br>
-          <a href="tel:+2348033948570">+234 803 394 8570</a><br>
-          <a href="tel:+2347016634230">+234 701 663 4230</a>
-        </address>
-      </div>
-    </nav>
-    <div class="footer-legal">
-      <span>© 2026 Vochus Global Services Ltd. All rights reserved.</span>
-      <a href="https://vochuseasysave.com/">www.vochuseasysave.com</a>
     </div>
   </div>
 </footer>
