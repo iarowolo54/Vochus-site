@@ -21,12 +21,12 @@ JS = r"""
   // every full-width block directly inside a wrap must sit on the wrap's content edges
   d.querySelectorAll('main .wrap > *').forEach(e => {
     if (!/^(DIV|DL|UL|OL|TABLE|FORM|FIGURE)$/.test(e.tagName) || /section-head|kicker/.test(e.className)) return;
-    if (e.classList.contains('hero-inner') || /hero-grid|two|faq-layout|doc-grid/.test(e.parentElement.className) || e.closest('.center')) return;
+    if (e.classList.contains('hero-inner') || /hero-grid|two|faq-layout|doc-grid|auth-split/.test(e.parentElement.className) || e.closest('.center')) return;
     out.push(row('block ' + (e.className||e.tagName).split(' ').slice(0,2).join('.'), e, 'LR'));
   });
   // headings: on the wrap edge, or inset by their panel's own padding+border
   d.querySelectorAll('main h2').forEach(h => {
-    const panel = h.closest('.trust,.band,.cta,.card,.card-quiet,.vig,.ledger,.form-card');
+    const panel = h.closest('.trust,.band,.cta,.card,.card-quiet,.vig,.ledger,.form-card,.plate');
     if (panel) { const cs = getComputedStyle(panel); const inset = parseFloat(cs.paddingLeft) + parseFloat(cs.borderLeftWidth); const pb = r(panel);
       out.push(['h2 ' + h.textContent.trim().slice(0,22) + ' (in panel)', Math.round(r(h).left*100)/100, Math.round(pb.left*100)/100, 'I', inset]); }
     else out.push(row('h2 ' + h.textContent.trim().slice(0,22), h, h.closest('.two,.grid,.faq-layout,.doc-grid') ? 'X' : 'L'));

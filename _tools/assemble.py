@@ -76,7 +76,7 @@ def assemble(path):
     canonical = SITE + "/" + ("" if page == "index.html" else page)
     preload = ""
     if page == "index.html":
-        preload = ('<link rel="preload" href="assets/fonts/PlusJakartaSans-800-latin.woff2" as="font" type="font/woff2" crossorigin>\n'
+        preload = ('<link rel="preload" href="assets/fonts/PlusJakartaSans-var-latin.woff2" as="font" type="font/woff2" crossorigin>\n'
                    '<link rel="preload" href="assets/fonts/Inter-400-latin.woff2" as="font" type="font/woff2" crossorigin>\n')
     head = (read("head.html").replace("{{CANONICAL}}", canonical).replace("{{TITLE}}", html.escape(title, quote=True))
             .replace("{{DESCRIPTION}}", html.escape(desc, quote=True)).replace("{{SITE}}", SITE).replace("{{PRELOAD}}", preload))
