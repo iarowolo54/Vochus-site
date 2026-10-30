@@ -25,6 +25,7 @@
 @media (prefers-reduced-motion:reduce){:root{--t-fast:0ms;--t-base:0ms}html{scroll-behavior:auto}}
 @media (max-width:399px){:root{--t-body:16px}}
 @media (max-width:1023px){:root{--nav-h:56px}}
+@media (min-width:1146px){:root{--nav-h:72px}}
 
 /* ---------- 2. Fonts ---------- */
 @font-face{font-family:"Plus Jakarta Sans";font-weight:500 800;font-style:normal;font-display:swap;src:url(../fonts/PlusJakartaSans-var-latin.woff2) format("woff2")}
@@ -66,7 +67,7 @@ button{background:none;border:0;padding:0;cursor:pointer}
 .fn{font-size:var(--t-small);color:var(--ink-2)}  /* the rate condition, set as plain secondary text beside the rate */
 
 /* ---------- 4. Layout ---------- */
-.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:var(--gutter)}
+.wrap{max-width:calc(var(--wrap) + 2 * var(--gutter));margin-inline:auto;padding-inline:var(--gutter)}  /* 1200px of content, Quicken-style */
 .section{padding-block:var(--section-y)}
 .section-tight{padding-block:calc(var(--section-y) * .6)}
 .section-head{margin-bottom:var(--s-7)}
@@ -130,10 +131,11 @@ a.card:hover .more .ico{transform:translateX(2px)}
 .nav{position:sticky;top:0;z-index:50;background:var(--surface);border-bottom:1px solid var(--line);transition:box-shadow var(--t-base)}
 .nav.is-scrolled{box-shadow:var(--shadow-1)}
 .nav-bar{height:var(--nav-h);display:flex;align-items:center;gap:var(--s-4)}
+@media (min-width:1024px){.nav .wrap{max-width:1480px;padding-inline:20px}}  /* header container: 1440px + 20px sides, logo hugs left, auth hugs right */
 .brand{display:inline-flex;align-items:center;gap:10px;min-height:44px;color:var(--ink);text-decoration:none;font:600 16px/1 var(--font-display);letter-spacing:-.01em;flex:none}
 .brand:hover{text-decoration:none}
 .brand img{width:32px;height:28px}
-.nav-links{display:flex;align-items:center;gap:22px;list-style:none;margin-inline:auto}
+.nav-links{display:flex;align-items:center;gap:22px;list-style:none;margin-left:clamp(12px,2.5vw,40px);margin-right:auto}
 .nav-links a,.nav-links button{position:relative;display:inline-flex;align-items:center;height:44px;padding:0 2px;color:var(--ink-2);font:500 15px/1 var(--font-body);text-decoration:none;gap:4px;white-space:nowrap}
 .nav-links a:hover,.nav-links button:hover,.nav-links button[aria-expanded=true]{color:var(--ink);text-decoration:none}
 .nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:2px;background:var(--ink-green);transform:scaleX(0);transform-origin:left;transition:transform var(--t-fast) var(--ease)}
@@ -186,22 +188,23 @@ body.menu-open{overflow:hidden}
 }
 
 /* ---------- 9b. Home hero: full-bleed graded photo, white h1, two product cards sitting inside the photo ---------- */
-.hero-home{--green-photo:#7ADE97;position:relative;isolation:isolate;display:flex;flex-direction:column;min-height:640px;padding-top:clamp(48px,5vw,72px);padding-bottom:64px;background:var(--deep)}
+.hero-home{--green-photo:#7ADE97;position:relative;isolation:isolate;display:flex;flex-direction:column;min-height:0;padding-top:clamp(48px,5vw,72px);padding-bottom:64px;background:var(--deep)}
 .hero-bg{position:absolute;inset:0;z-index:-1;background:var(--deep);overflow:hidden}
 .hero-bg img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 30%}
 .hero-body{display:flex;flex-direction:column;flex:1 1 auto;width:100%}
 .hero-home h1{font:600 clamp(40px,4.2vw,60px)/1.15 var(--font-display);letter-spacing:-.03em;color:#fff;max-width:640px}
 .hero-home h1 .hl{color:var(--green-photo)}
 .hero-home .lede{margin-top:var(--s-5);font-size:clamp(17px,1.4vw,20px);line-height:1.5;color:#fff;max-width:460px}
-.hero-cards{display:grid;grid-template-columns:repeat(2,minmax(0,400px));gap:var(--g);justify-content:start;margin-top:auto;padding-top:var(--s-7)}
-.hero-card{display:flex;flex-direction:column;padding:var(--s-5);border:0;border-radius:var(--r-lg);box-shadow:var(--shadow-3)}
+.hero-cards{--hc:316px;display:grid;grid-template-columns:repeat(2,var(--hc));gap:var(--g);justify-content:start;margin-top:auto;padding-top:var(--s-7)}
+@media (max-width:1199px){.hero-cards{--hc:300px}}
+.hero-card{display:flex;flex-direction:column;aspect-ratio:1/1;padding:28px;border:0;border-radius:var(--r-lg);box-shadow:var(--shadow-3)}  /* square like Quicken's; aspect-ratio is a preferred size, so content can never clip */
 .hero-card h2{display:flex;align-items:center;gap:var(--s-3);margin-top:0;font-size:20px;letter-spacing:-.01em}
 .hero-card h2 .tile{width:36px;height:36px;border-radius:var(--r-sm)}
 .hero-card h2 .tile .ico{width:18px;height:18px}
 .hero-card .hc-fig{margin-top:var(--s-4);font:700 22px/1.2 var(--font-display);letter-spacing:-.015em;color:var(--ink)}
 .hero-card .hc-sub{margin-top:2px;font-size:var(--t-small);color:var(--ink-2)}
 .hero-card .hc-desc{margin-top:var(--s-3);font-size:15px;line-height:1.5;color:var(--ink-2);max-width:none}
-.hero-card .btn-row{margin-top:auto;padding-top:var(--s-4);flex-wrap:nowrap}
+.hero-card .btn-row{margin-top:auto;padding-top:var(--s-4);flex-wrap:nowrap;gap:var(--s-2)}
 .hero-card .btn{flex:1 1 0;height:44px;padding:0 14px;font-size:15px}
 @media (max-width:399px){.hero-card .btn-row{flex-direction:row}.hero-card .btn{width:auto}}
 .hero-after{padding-top:0}
@@ -214,6 +217,7 @@ body.menu-open{overflow:hidden}
   .hero-home h1 .hl{color:var(--ink-green)}
   .hero-home .lede{color:var(--ink-2);max-width:56ch}
   .hero-cards{grid-template-columns:repeat(2,minmax(0,1fr));padding-top:var(--s-6)}
+  .hero-card{aspect-ratio:auto}
   .hero-after{padding-top:0}
 }
 @media (max-width:599px){

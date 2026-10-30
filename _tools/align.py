@@ -22,9 +22,12 @@ JS = r"""
   const d = f.contentDocument, r = e => e && e.getBoundingClientRect();
   const row = (name, e, side) => { const b = r(e); return b ? [name, Math.round(b.left*100)/100, Math.round(b.right*100)/100, side] : [name, null, null, side]; };
   const out = [];
-  out.push(row('nav logo', d.querySelector('.nav-bar .brand'), 'L'));
+  // the header has its own wider container (1440px + 20px sides): check its items against the nav-bar's own edges
+  const nb = d.querySelector('.nav-bar'), ncs = getComputedStyle(nb), nbb = r(nb);
+  const navL = nbb.left + parseFloat(ncs.paddingLeft), navR = nbb.right - parseFloat(ncs.paddingRight);
+  out.push(['nav logo (nav container)', Math.round(r(d.querySelector('.nav-bar .brand')).left*100)/100, Math.round(navL*100)/100, 'E']);
   const btns = [...d.querySelectorAll('.nav-cta .btn')].filter(b => b.offsetParent !== null);
-  out.push(row('last nav button', btns[btns.length-1], 'R'));
+  out.push(['last nav button (nav container)', Math.round(r(btns[btns.length-1]).right*100)/100, Math.round(navR*100)/100, 'E']);
   const h1 = d.querySelector('h1');
   const hp = h1 && h1.closest('.hero-panel');
   if (hp) { const cs = getComputedStyle(hp), pb = r(hp); const inset = parseFloat(cs.paddingLeft) + parseFloat(cs.borderLeftWidth);
@@ -76,7 +79,7 @@ def main():
             if "L" in side: checks.append(("left", l, L))
             if "R" in side: checks.append(("right", r, R))
             if "I" in side: checks.append((f"left = panel edge + inset {extra[0]:g}", l, r + extra[0]))
-            if "E" in side: checks.append(("right = panel inner right", l, r))
+            if "E" in side: checks.append(("= container edge", l, r))
             flags = ["OK" if v is not None and abs(v - ref) < 0.51 else f"MISMATCH ({v} vs {ref:g})" for _, v, ref in checks]
             ok_all &= all(x == "OK" for x in flags)
             print(f"  {name:<32} left={l!s:<8} right={r!s:<8} {' / '.join(f'{c[0]} {x}' for c, x in zip(checks, flags))}")
