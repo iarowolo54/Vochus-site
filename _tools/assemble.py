@@ -32,8 +32,6 @@ APP = {
     "apk_agent":    APP_BASE + "/downloads/easysave-agent.apk",
 }
 
-AUTH_PAGES = {"login.html", "saver-login.html", "agent-login.html", "forgot-password.html"}   # minimal header: logo + Back to website
-
 ARROW = '<svg class="ico" aria-hidden="true"><use href="#i-arrow-right"/></svg>'
 def btn(cls, href, label, app=None):
     attrs = f' data-app="{app}" rel="noopener"' if app else ""
@@ -82,7 +80,7 @@ def assemble(path):
                    '<link rel="preload" href="assets/fonts/Inter-400-latin.woff2" as="font" type="font/woff2" crossorigin>\n')
     head = (read("head.html").replace("{{CANONICAL}}", canonical).replace("{{TITLE}}", html.escape(title, quote=True))
             .replace("{{DESCRIPTION}}", html.escape(desc, quote=True)).replace("{{SITE}}", SITE).replace("{{PRELOAD}}", preload))
-    nav = read("nav-auth.html") if page in AUTH_PAGES else read("nav.html").replace("{{CTA}}", ctas(page))
+    nav = read("nav.html").replace("{{CTA}}", ctas(page))
     # active page: aria-current on the matching link(s)
     nav = re.sub(rf'<a href="{re.escape(page)}">', f'<a href="{page}" aria-current="page">', nav)
     out = between(src, "head", head)
