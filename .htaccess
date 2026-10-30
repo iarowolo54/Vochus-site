@@ -1,9 +1,25 @@
-# Vochus Easy Save — static site on cPanel/Apache
-ErrorDocument 404 /404.html
+# Vochus Easy Save marketing site (static HTML + send.php) on Apache (DirectAdmin / CloudLinux).
+# Upload this only after the stub Node.js app has been removed in DirectAdmin, so no Passenger* lines remain. See _docs/DEPLOY.md.
 Options -Indexes
+ErrorDocument 404 /404.html
+DirectoryIndex index.html
+
+# Force HTTPS and the apex domain (www -> vochuseasysave.com). Remove the www rule if the site should live on www instead.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  RewriteCond %{HTTP_HOST} ^www\.vochuseasysave\.com$ [NC]
+  RewriteRule ^ https://vochuseasysave.com%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# Never serve the form config, data files or dotfiles
+<FilesMatch "^(send-config\.php|.*\.json|\.(?!well-known).*)$">
+  Require all denied
+</FilesMatch>
 
 <IfModule mod_headers.c>
-  # Fingerprint-free assets: fonts/images are immutable in practice; CSS/JS revalidate daily so edits ship
+  # Fonts and images are immutable in practice; CSS/JS revalidate daily so edits ship; HTML revalidates often
   <FilesMatch "\.(woff2|webp|jpg|png|svg|ico)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
@@ -16,14 +32,11 @@ Options -Indexes
   Header always set X-Content-Type-Options "nosniff"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  # The site has no inline scripts or styles; images are self + data: (the CSS select arrow); fonts are self-hosted.
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'self'; frame-ancestors 'self'; base-uri 'self'; object-src 'none'"
 </IfModule>
 
 <IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml text/xml text/plain
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript image/svg+xml application/json
 </IfModule>
-<IfModule mod_brotli.c>
-  AddOutputFilterByType BROTLI_COMPRESS text/html text/css application/javascript application/json image/svg+xml text/xml text/plain
-</IfModule>
-
-AddType font/woff2 .woff2
-AddType image/webp .webp

@@ -121,11 +121,14 @@
 
     <div class="card form-card" id="message">
       <h2>Send us a message</h2>
-      <form class="form" data-mailto="mailto:info@vochuseasysave.com?subject=Website%20message" action="mailto:info@vochuseasysave.com?subject=Website%20message" method="post" enctype="text/plain" novalidate>
-        <div class="field"><label for="ct-name">Full name</label><input id="ct-name" name="Full name" type="text" autocomplete="name" required></div>
-        <div class="field"><label for="ct-email">Email address</label><input id="ct-email" name="Email address" type="email" autocomplete="email" inputmode="email" required></div>
+      <form class="form" id="form" action="send.php" method="post" novalidate>
+        <input type="hidden" name="form" value="contact"><input type="hidden" name="t" value="">
+        <div class="hp" aria-hidden="true"><label for="ct-website">Website</label><input id="ct-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+        <div class="form-alert" role="alert" id="form-error">Your message was not sent. Please check the fields below and try again, or email <a href="mailto:info@vochuseasysave.com">info@vochuseasysave.com</a>.</div>
+        <div class="field"><label for="ct-name">Full name</label><input id="ct-name" name="name" type="text" autocomplete="name" maxlength="100" required><span class="err" id="ct-name-err" aria-live="polite"></span></div>
+        <div class="field"><label for="ct-email">Email address</label><input id="ct-email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" required><span class="err" id="ct-email-err" aria-live="polite"></span></div>
         <div class="field"><label for="ct-subject">Subject</label>
-          <select id="ct-subject" name="Subject" required>
+          <select id="ct-subject" name="subject" required>
             <option value="">Select a topic</option>
             <option>Registration help</option>
             <option>My savings plan</option>
@@ -134,12 +137,17 @@
             <option>Technical issue</option>
             <option>Other</option>
           </select>
+          <span class="err" id="ct-subject-err" aria-live="polite"></span>
         </div>
-        <div class="field"><label for="ct-msg">Message</label><textarea id="ct-msg" name="Message" rows="4" required></textarea></div>
-        <p class="help">Submitting opens your email app with this message ready to send to <a href="mailto:info@vochuseasysave.com">info@vochuseasysave.com</a>.</p>
+        <div class="field"><label for="ct-msg">Message</label><textarea id="ct-msg" name="message" rows="4" maxlength="3000" required></textarea><span class="err" id="ct-msg-err" aria-live="polite"></span></div>
+        <p class="help">We'll reply to the email address you give us.</p>
         <button type="submit" class="btn btn-primary btn-block">Send Message<svg class="ico" aria-hidden="true"><use href="#i-arrow-right"/></svg></button>
-        <p class="status" role="status" tabindex="-1" hidden>Thank you. We'll be in touch within one business day.</p>
       </form>
+      <div class="form-done" role="status" tabindex="-1" hidden>
+        <h3>Thank you. Your message has been sent.</h3>
+        <p>We'll reply to the email address you gave us.</p>
+        <button type="button" class="btn-ghost again">Send another message<svg class="ico ico-sm" aria-hidden="true"><use href="#i-arrow-right"/></svg></button>
+      </div>
     </div>
   </div>
 </section>

@@ -137,19 +137,55 @@
   }
 
 
-  /* ---- Mail forms (agent application, contact): the form's own action is a mailto:, so it works without JS.
-         With JS we compose a readable body from the labelled fields, open it, and show the page's status panel. ---- */
-  $$('form[data-mailto]').forEach(function (form) {
-    form.addEventListener('submit', function (e) {
-      if (!form.checkValidity()) return;            // let the browser show its validation UI
-      e.preventDefault();
-      var lines = $$('input, select, textarea', form).filter(function (f) { return f.name; }).map(function (f) {
-        var lab = form.querySelector('label[for="' + f.id + '"]');
-        return (lab ? lab.textContent.trim() : f.name) + ': ' + f.value.trim();
+  /* ---- Forms (agent application, contact): the form posts to send.php and works without JS (303 redirects).
+         With JS: client-side validation in the page's error styling, fetch with a loading state, success panel in place,
+         and an inline alert with a mailto fallback when the request fails. The entered data is kept on failure. ---- */
+  $$('form[action="send.php"]').forEach(function (form) {
+    var tInput = $('input[name="t"]', form); if (tInput) tInput.value = String(Date.now());
+    var btn = $('button[type="submit"]', form), alertBox = $('.form-alert', form), done = $('.form-done', form.parentNode);
+    if (/[?&]error=1/.test(location.search) && alertBox) alertBox.classList.add('is-on');
+    var fields = $$('input, select, textarea', form).filter(function (f) { return f.name && f.type !== 'hidden' && !f.closest('.hp'); });
+    var setErr = function (f, msg) {
+      var fld = f.closest('.field'), err = fld && $('.err', fld);
+      f.setAttribute('aria-invalid', msg ? 'true' : 'false');
+      if (err) { err.textContent = msg; if (msg) f.setAttribute('aria-describedby', err.id); else f.removeAttribute('aria-describedby'); }
+      if (fld) fld.classList.toggle('is-invalid', !!msg);
+    };
+    var validate = function () {
+      var first = null;
+      fields.forEach(function (f) {
+        var v = f.value.trim(), msg = '';
+        if (f.required && !v) msg = 'Please fill in this field.';
+        else if (f.type === 'email' && v && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) msg = 'Enter a valid email address.';
+        else if (f.pattern && v && !(new RegExp('^(?:' + f.pattern + ')$')).test(v)) msg = 'Enter a valid phone number.';
+        setErr(f, msg); if (msg && !first) first = f;
       });
-      var href = form.getAttribute('data-mailto') + (form.getAttribute('data-mailto').indexOf('?') > -1 ? '&' : '?') + 'body=' + encodeURIComponent(lines.join('\n'));
-      location.href = href;
-      var st = $('.status', form); if (st) { st.hidden = false; st.focus(); }
+      return first;
+    };
+    fields.forEach(function (f) { f.addEventListener('input', function () { if (f.getAttribute('aria-invalid') === 'true') setErr(f, ''); }); });
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (alertBox) alertBox.classList.remove('is-on');
+      var bad = validate(); if (bad) { bad.focus(); return; }
+      var label = btn.innerHTML;
+      btn.disabled = true; btn.setAttribute('aria-busy', 'true'); btn.innerHTML = '<span class="spin" aria-hidden="true"></span>Sending…';
+      var finish = function () { btn.disabled = false; btn.removeAttribute('aria-busy'); btn.innerHTML = label; };
+      fetch(form.getAttribute('action'), { method: 'POST', headers: { 'Accept': 'application/json' }, body: new URLSearchParams(new FormData(form)) })
+        .then(function (r) { return r.json().then(function (j) { return { ok: r.ok && j && j.ok, j: j }; }); })
+        .then(function (res) {
+          finish();
+          if (res.ok) { form.hidden = true; if (done) { done.hidden = false; done.focus(); } return; }
+          var errs = res.j && res.j.errors || {}, first = null;
+          fields.forEach(function (f) { if (errs[f.name]) { setErr(f, errs[f.name]); if (!first) first = f; } });
+          if (alertBox) alertBox.classList.add('is-on');
+          if (first) first.focus(); else if (alertBox) alertBox.scrollIntoView({ block: 'nearest' });
+        })
+        .catch(function () { finish(); if (alertBox) alertBox.classList.add('is-on'); });
+    });
+    var again = done && $('.again', done);
+    if (again) again.addEventListener('click', function () {
+      form.reset(); fields.forEach(function (f) { setErr(f, ''); }); if (tInput) tInput.value = String(Date.now());
+      done.hidden = true; form.hidden = false; if (fields[0]) fields[0].focus();
     });
   });
 
@@ -227,6 +263,7 @@
       if (out) out.textContent = s ? (n ? n + ' question' + (n === 1 ? '' : 's') + ' match' : 'No questions match your search.') : '';
       var empty = $('#faq-empty'); if (empty) empty.hidden = !(s && !n);
     };
+    if (q.form) q.form.addEventListener('submit', function (e) { e.preventDefault(); });
     q.addEventListener('input', run);
     q.addEventListener('keydown', function (e) { if (e.key === 'Escape') { q.value = ''; run(); } });
   }

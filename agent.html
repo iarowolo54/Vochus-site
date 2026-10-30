@@ -135,17 +135,25 @@
 
     <div class="card form-card first-sm" id="apply">
       <h2>Agent application</h2>
-      <form class="form" data-mailto="mailto:info@vochuseasysave.com?subject=Agent%20application" action="mailto:info@vochuseasysave.com?subject=Agent%20application" method="post" enctype="text/plain" novalidate>
+      <form class="form" id="form" action="send.php" method="post" novalidate>
+        <input type="hidden" name="form" value="agent"><input type="hidden" name="t" value="">
+        <div class="hp" aria-hidden="true"><label for="ag-website">Website</label><input id="ag-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+        <div class="form-alert" role="alert" id="form-error">Your message was not sent. Please check the fields below and try again, or email <a href="mailto:info@vochuseasysave.com">info@vochuseasysave.com</a>.</div>
         <div class="form-2 form">
-          <div class="field"><label for="ag-first">First name</label><input id="ag-first" name="First name" type="text" autocomplete="given-name" required></div>
-          <div class="field"><label for="ag-last">Last name</label><input id="ag-last" name="Last name" type="text" autocomplete="family-name" required></div>
+          <div class="field"><label for="ag-first">First name</label><input id="ag-first" name="first" type="text" autocomplete="given-name" maxlength="100" required><span class="err" id="ag-first-err" aria-live="polite"></span></div>
+          <div class="field"><label for="ag-last">Last name</label><input id="ag-last" name="last" type="text" autocomplete="family-name" maxlength="100" required><span class="err" id="ag-last-err" aria-live="polite"></span></div>
         </div>
-        <div class="field"><label for="ag-phone">Phone number</label><input id="ag-phone" name="Phone number" type="tel" autocomplete="tel" inputmode="tel" placeholder="e.g. 0803 123 4567" pattern="[0-9+\s\-]{7,18}" required></div>
-        <div class="field"><label for="ag-msg">Message</label><textarea id="ag-msg" name="Message" rows="4" placeholder="Where are you based, and why would you like to be a Vochus agent?" required></textarea></div>
-        <p class="help">Submitting opens your email app with this application ready to send to <a href="mailto:info@vochuseasysave.com">info@vochuseasysave.com</a>.</p>
+        <div class="field"><label for="ag-phone">Phone number</label><input id="ag-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="e.g. 0803 123 4567" pattern="[0-9+\s\-()]{{7,30}}" maxlength="30" required><span class="err" id="ag-phone-err" aria-live="polite"></span></div>
+        <div class="field"><label for="ag-email">Email address</label><input id="ag-email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" required><span class="err" id="ag-email-err" aria-live="polite"></span></div>
+        <div class="field"><label for="ag-msg">Message</label><textarea id="ag-msg" name="message" rows="4" maxlength="3000" placeholder="Where are you based, and why would you like to be a Vochus agent?" required></textarea><span class="err" id="ag-msg-err" aria-live="polite"></span></div>
+        <p class="help">We'll reply to the email address you give us.</p>
         <button type="submit" class="btn btn-primary btn-block">Submit Application<svg class="ico" aria-hidden="true"><use href="#i-arrow-right"/></svg></button>
-        <p class="status" role="status" tabindex="-1" hidden>Thank you. Your email app should have opened with your application. Please press send. If nothing opened, email us at <a href="mailto:info@vochuseasysave.com">info@vochuseasysave.com</a> with your name and phone number.</p>
       </form>
+      <div class="form-done" role="status" tabindex="-1" hidden>
+        <h3>Thank you. Your application has been sent.</h3>
+        <p>We will be in touch at the email address you gave us.</p>
+        <button type="button" class="btn-ghost again">Send another application<svg class="ico ico-sm" aria-hidden="true"><use href="#i-arrow-right"/></svg></button>
+      </div>
     </div>
   </div>
 </section>
