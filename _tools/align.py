@@ -6,6 +6,16 @@ usage: align.py <page.html> [--guides out.png]   (guides: draws the wrap edges o
 """
 import json, os, re, subprocess, sys, tempfile
 
+# Every temp dir (Chrome profiles, iframe wrappers) is removed on exit so
+# repeated QA runs don't fill the disk.
+import atexit, shutil
+_mkdtemp = tempfile.mkdtemp
+_made = []
+def _tracked_mkdtemp(*a, **k):
+    d = _mkdtemp(*a, **k); _made.append(d); return d
+tempfile.mkdtemp = _tracked_mkdtemp
+atexit.register(lambda: [shutil.rmtree(d, ignore_errors=True) for d in _made])
+
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 JS = r"""
 (() => {
@@ -20,7 +30,7 @@ JS = r"""
   if (hg && hg.children.length > 1 && getComputedStyle(hg).gridTemplateColumns.split(' ').length > 1) out.push(row('hero right component', hg.lastElementChild, 'R'));
   // every full-width block directly inside a wrap must sit on the wrap's content edges
   d.querySelectorAll('main .wrap > *').forEach(e => {
-    if (!/^(DIV|DL|UL|OL|TABLE|FORM|FIGURE)$/.test(e.tagName) || /section-head|kicker/.test(e.className)) return;
+    if (!/^(DIV|DL|UL|OL|TABLE|FORM|FIGURE)$/.test(e.tagName) || /section-head/.test(e.className)) return;
     if (e.classList.contains('hero-inner') || /hero-grid|two|faq-layout|doc-grid|auth-split/.test(e.parentElement.className) || e.closest('.center')) return;
     out.push(row('block ' + (e.className||e.tagName).split(' ').slice(0,2).join('.'), e, 'LR'));
   });

@@ -6,6 +6,16 @@ usage: probe.py <page.html> [width]
 """
 import json, os, re, subprocess, sys, tempfile
 
+# Every temp dir (Chrome profiles, iframe wrappers) is removed on exit so
+# repeated QA runs don't fill the disk.
+import atexit, shutil
+_mkdtemp = tempfile.mkdtemp
+_made = []
+def _tracked_mkdtemp(*a, **k):
+    d = _mkdtemp(*a, **k); _made.append(d); return d
+tempfile.mkdtemp = _tracked_mkdtemp
+atexit.register(lambda: [shutil.rmtree(d, ignore_errors=True) for d in _made])
+
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 JS = r"""
 (() => {
