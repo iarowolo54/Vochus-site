@@ -27,7 +27,7 @@ JS = r"""
     if (!vis(e)) return;
     let r = e.getBoundingClientRect();
     const ps = w.getComputedStyle(e, '::after');   // absolute ::after boxes extend the hit area
-    if (ps.position === 'absolute' && ps.content !== 'none') { const t = parseFloat(ps.top)||0, b = parseFloat(ps.bottom)||0, l = parseFloat(ps.left)||0, rr = parseFloat(ps.right)||0; r = { width: r.width - l - rr, height: r.height - t - b }; }
+    if (ps.position === 'absolute' && ps.content !== 'none' && parseFloat(ps.height) >= 24) { /* a thin underline pseudo does not change the hit box */ const t = parseFloat(ps.top)||0, b = parseFloat(ps.bottom)||0, l = parseFloat(ps.left)||0, rr = parseFloat(ps.right)||0; r = { width: r.width - l - rr, height: r.height - t - b }; }
     // inline links inside running text are exempt (WCAG 2.5.8 inline exception); flag everything else
     const inline = e.tagName === 'A' && w.getComputedStyle(e).display === 'inline' && e.closest('p,li,figcaption,address,dd');
     if (!inline && (r.width < 44 || r.height < 44)) out.tap.push(`${e.tagName.toLowerCase()}.${(e.className||'').toString().split(' ')[0]} "${(e.textContent||e.value||'').trim().slice(0,30)}" ${Math.round(r.width)}x${Math.round(r.height)}`);
