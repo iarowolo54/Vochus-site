@@ -33,3 +33,19 @@ listed individually.
 | Privacy | Section 1 | none | Messages and agent applications sent through the forms on this website are emailed to Vochus at info@vochuseasysave.com and used only to respond to you. | Describes the new form handling. |
 | All pages | Company name | Zipwaves Technologies Limited | same | Applied everywhere the old name appeared, including meta tags. |
 | Emails to Vochus | Subject lines | none | [Vochus website] Message: {subject}: {name} / [Vochus website] Agent application: {name} | Internal, but shown here for completeness. |
+
+## Search titles and descriptions (shown in Google results, not on the page)
+
+| Page | Before | Now |
+|---|---|---|
+| Home title | Vochus Easy Save \| Save more. Earn 12% every year | Vochus Easy Save \| Save daily, weekly or monthly and earn 12% interest |
+| Home description | Vochus Easy Save and Vochus Gift Cards, products of Zipwaves Technologies Limited. Save daily, weekly or monthly … (163 characters, cut off in results) | Vochus Easy Save: save daily, weekly or monthly online or with an agent and earn 12% annual interest. A product of Zipwaves Technologies Limited. |
+| How it works | How It Works \| Vochus Easy Save | How Vochus Easy Save Works \| Save online or with an agent |
+| Plans | Savings Plans \| Vochus Easy Save | Savings Plans: Daily, Weekly, Monthly and Group (Ajo) \| Vochus Easy Save |
+| Interest | Interest \| Vochus Easy Save | 12% Annual Interest on Your Savings \| Vochus Easy Save |
+| Benefits | Benefits \| Vochus Easy Save | Benefits of Saving with Vochus Easy Save |
+| Portal | Customer Portal \| Vochus Easy Save | Customer Portal: Track Your Savings \| Vochus Easy Save |
+| Agent | Become an Agent \| Vochus Easy Save | Become a Vochus Agent: Earn 65% Commission \| Vochus Easy Save |
+| Contact title | Contact \| Vochus Easy Save | Contact Vochus Easy Save |
+| Contact description | Contact Zipwaves Technologies Limited. | Contact Vochus Easy Save by email or phone. Zipwaves Technologies Limited, 286 Ikorodu Road, Lagos, Nigeria. |
+| Log in | Log In \| Vochus Easy Save | Log In to Vochus Easy Save |
