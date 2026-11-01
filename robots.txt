@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /thanks.html
 Disallow: /send.php
 
 Sitemap: https://vochuseasysave.com/sitemap.xml

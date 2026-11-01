@@ -7,18 +7,18 @@ Excluded: _qa, _tools, _src, _docs, _partials, .git, dist itself, and any dry-ru
 
     python3 _tools/package.py
 """
-import datetime, os, re, shutil, sys, zipfile
+import datetime, glob, os, re, shutil, sys, zipfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DIST = os.path.join(ROOT, "dist")
-TOP = ["send.php", "send-config.php", ".htaccess", "robots.txt", "sitemap.xml"]
+TOP = ["send.php", "send-config.php", ".htaccess", "robots.txt", "sitemap.xml", "favicon.ico"] + [os.path.basename(p) for p in glob.glob(os.path.join(ROOT, "[0-9a-f]" * 32 + ".txt"))]   # + IndexNow key file
 
 def refs_in(text):
     out = set()
     for m in re.finditer(r'(?:src|href|poster)="(assets/[^"#?]+)"', text):
         out.add(m.group(1))
-    # absolute self-references in meta tags (og:image, twitter:image)
-    for m in re.finditer(r'content="https://(?:www\.)?vochuseasysave\.com/(assets/[^"#?]+)"', text):
+    # absolute self-references (og:image in meta tags, the logo in JSON-LD)
+    for m in re.finditer(r'https://(?:www\.)?vochuseasysave\.com/(assets/[^"#?\\]+)', text):
         out.add(m.group(1))
     for m in re.finditer(r'srcset="([^"]+)"', text):
         for part in m.group(1).split(","):

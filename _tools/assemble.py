@@ -13,7 +13,7 @@ Markers (each pair is replaced wholesale, so re-running is idempotent):
     <!-- sprite --> ... <!-- /sprite -->  lucide <symbol> sprite, only the icons the page references
 App links are any <a ... data-app="KEY"> — their href is (re)written from APP.
 """
-import glob, html, os, re, sys
+import datetime, glob, html, json, os, re, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 P = lambda *a: os.path.join(ROOT, *a)
@@ -31,6 +31,48 @@ APP = {
     "apk_customer": APP_BASE + "/downloads/easysave-customer.apk",
     "apk_agent":    APP_BASE + "/downloads/easysave-agent.apk",
 }
+
+# ---- Search: pages kept out of the index, and structured data ----
+NOINDEX = {"saver-login.html", "agent-login.html", "forgot-password.html", "thanks.html", "404.html"}
+ORG = {
+    "@type": "Organization", "@id": SITE + "/#org",
+    "name": "Vochus Easy Save",
+    "alternateName": ["Vochus", "Easy Save", "Vochus EasySave", "VochusEasySave"],
+    "url": SITE + "/",
+    "logo": SITE + "/assets/img/icon-512.png",
+    "email": "info@vochuseasysave.com",
+    "telephone": "+2348033948570",
+    "address": {"@type": "PostalAddress", "streetAddress": "286, Ikorodu Road, Anthony",
+                "addressLocality": "Lagos", "addressCountry": "NG"},
+    "areaServed": "NG",
+    "parentOrganization": {"@type": "Organization", "name": "Zipwaves Technologies Limited"},
+    "contactPoint": [{"@type": "ContactPoint", "contactType": "customer support", "email": "info@vochuseasysave.com",
+                      "telephone": "+2348033948570", "areaServed": "NG", "availableLanguage": "en"}],
+}
+WEBSITE = {"@type": "WebSite", "@id": SITE + "/#website", "name": "Vochus Easy Save",
+           "alternateName": ["Vochus", "Easy Save", "Vochus EasySave"], "url": SITE + "/",
+           "publisher": {"@id": SITE + "/#org"}, "inLanguage": "en-NG"}
+
+def strip_tags(x):
+    return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", x))).strip()
+
+def jsonld(page, src, title, canonical):
+    graph = []
+    if page == "index.html":
+        graph += [ORG, WEBSITE]
+    elif page not in NOINDEX:
+        name = title.split(" | ")[0].strip()
+        graph.append({"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": SITE + "/"},
+            {"@type": "ListItem", "position": 2, "name": name, "item": canonical}]})
+    if page == "faq.html":
+        qa = re.findall(r'<details class="faq"><summary>(.*?)</summary><div class="ans">(.*?)</div></details>', src, re.S)
+        graph.append({"@type": "FAQPage", "mainEntity": [
+            {"@type": "Question", "name": strip_tags(q), "acceptedAnswer": {"@type": "Answer", "text": strip_tags(a)}} for q, a in qa]})
+    if not graph:
+        return ""
+    data = json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False, separators=(",", ":"))
+    return '<script type="application/ld+json">' + data.replace("</", "<\\/") + "</script>\n"
 
 ARROW = '<svg class="ico" aria-hidden="true"><use href="#i-arrow-right"/></svg>'
 def btn(cls, href, label, app=None):
@@ -82,7 +124,9 @@ def assemble(path):
         preload += ('<link rel="preload" as="image" type="image/webp" imagesrcset="assets/img/hero-trader-1376.webp 1376w, assets/img/hero-trader-1920.webp 1920w, assets/img/hero-trader-2752.webp 2752w" imagesizes="100vw" media="(min-width:1024px)" fetchpriority="high">\n'
                     '<link rel="preload" as="image" type="image/webp" imagesrcset="assets/img/hero-trader-m-640.webp 640w, assets/img/hero-trader-m-956.webp 956w, assets/img/hero-trader-m-1280.webp 1280w" imagesizes="100vw" media="(max-width:1023px)" fetchpriority="high">\n')
     head = (read("head.html").replace("{{CANONICAL}}", canonical).replace("{{TITLE}}", html.escape(title, quote=True))
-            .replace("{{DESCRIPTION}}", html.escape(desc, quote=True)).replace("{{SITE}}", SITE).replace("{{PRELOAD}}", preload))
+            .replace("{{DESCRIPTION}}", html.escape(desc, quote=True)).replace("{{SITE}}", SITE).replace("{{PRELOAD}}", preload)
+            .replace("{{ROBOTS}}", '<meta name="robots" content="noindex, follow">\n' if page in NOINDEX else "")
+            .replace("{{JSONLD}}", jsonld(page, src, title, canonical)))
     nav = read("nav.html").replace("{{CTA}}", ctas(page))
     # active page: aria-current on the matching link(s)
     nav = re.sub(rf'<a href="{re.escape(page)}">', f'<a href="{page}" aria-current="page">', nav)
@@ -97,6 +141,15 @@ def assemble(path):
         with open(path, "w", encoding="utf-8") as fh:
             fh.write(out)
     return out != src
+
+def write_sitemap():
+    pages = sorted(os.path.basename(p) for p in glob.glob(P("*.html")) if os.path.basename(p) not in NOINDEX)
+    pages.remove("index.html"); pages.insert(0, "index.html")
+    today = datetime.date.today().isoformat()
+    rows = "".join(f"  <url><loc>{SITE}/{'' if p == 'index.html' else p}</loc><lastmod>{today}</lastmod></url>\n" for p in pages)
+    body = f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{rows}</urlset>\n'
+    with open(P("sitemap.xml"), "w", encoding="utf-8") as fh:
+        fh.write(body)
 
 def stamp_js():
     js_path = P("assets", "js", "main.js")
@@ -116,3 +169,5 @@ if __name__ == "__main__":
             if "<!-- nav -->" not in fh.read():
                 continue
         print(("updated " if assemble(p) else "ok      ") + os.path.basename(p))
+    if not sys.argv[1:]:
+        write_sitemap()
