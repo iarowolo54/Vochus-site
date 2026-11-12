@@ -23,7 +23,6 @@ SITE = "https://vochuseasysave.com"
 # ---- The ONE place app destinations live (§10). Also stamped into assets/js/main.js. ----
 APP_BASE = "https://easysave.vochusglobalservices.co.uk"   # confirmed by the client 2026-10-29 (spec §10)
 APP = {
-    "register":     APP_BASE + "/customer/enroll",
     "saver_login":  APP_BASE + "/customer/login",
     "saver_reset":  APP_BASE + "/customer/forgot-password",
     "agent_login":  APP_BASE + "/",
@@ -74,18 +73,22 @@ def jsonld(page, src, title, canonical):
     data = json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False, separators=(",", ":"))
     return '<script type="application/ld+json">' + data.replace("</", "<\\/") + "</script>\n"
 
+# New savers join only through an agent (registered in person, or invited by the agent's link), never by self sign-up.
+FIND_AGENT = "contact.html?topic=agent#form"
+
 ARROW = '<svg class="ico" aria-hidden="true"><use href="#i-arrow-right"/></svg>'
 def btn(cls, href, label, app=None):
     attrs = f' data-app="{app}" rel="noopener"' if app else ""
     return f'<a class="btn {cls} btn-sm" href="{href}"{attrs}>{label}</a>'
 
 def ctas(page):
-    """Header CTAs: Home leads with the saver action; agent.html leads with the agent action."""
+    """Header CTAs. Customers join only through an agent, so there is no sign-up button: the plain "Log In" link sits
+    beside the bar, and the green button finds an agent (agent.html leads with the agent application instead)."""
     if page == "index.html":
-        return btn("btn-secondary", "agent.html", "Apply as an Agent") + "\n      " + btn("btn-primary", APP["register"], "Start Earning Interest", "register")
+        return btn("btn-secondary", "agent.html", "Apply as an Agent") + "\n      " + btn("btn-primary", FIND_AGENT, "Find an Agent")
     if page == "agent.html":
         return btn("btn-secondary", "login.html", "Log In") + "\n      " + btn("btn-primary", "#apply", "Apply as an Agent")
-    return btn("btn-secondary", "login.html", "Log In") + "\n      " + btn("btn-primary", APP["register"], "Start Earning Interest", "register")
+    return btn("btn-secondary", "login.html", "Log In") + "\n      " + btn("btn-primary", FIND_AGENT, "Find an Agent")
 
 def between(src, name, body):
     pat = re.compile(rf"<!-- {name} -->.*?<!-- /{name} -->", re.S)

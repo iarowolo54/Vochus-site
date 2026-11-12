@@ -49,3 +49,22 @@ listed individually.
 | Contact title | Contact \| Vochus Easy Save | Contact Vochus Easy Save |
 | Contact description | Contact Zipwaves Technologies Limited. | Contact Vochus Easy Save by email or phone. Zipwaves Technologies Limited, 286 Ikorodu Road, Lagos, Nigeria. |
 | Log in | Log In \| Vochus Easy Save | Log In to Vochus Easy Save |
+
+## Joining only through an agent (2026-11-12)
+
+New savers can't sign themselves up. They join through an agent, who registers them in person or sends them an invite link. Every self sign-up link was removed (38 links across 16 pages) and "Find an Agent" now leads to the contact form with the topic "Find an agent" already chosen.
+
+| Page | Section | Before | Now |
+|---|---|---|---|
+| All pages | Header button | Start Earning Interest (to the app's sign-up page) | Find an Agent (the Log In link stays beside it) |
+| Home | Saver card buttons | Get started · Learn more | Log In · Find an Agent |
+| Home | Numbers band | 5 min · To Register | 1 · Dedicated Agent |
+| Home, How it works | "Save online" path, step 1 | Register: Open your account on the Customer Portal with your phone number, a valid ID and your BVN. | Get your invite link: Your Vochus agent sends you a link. Open it to set up your account with your phone number, a valid ID and your BVN. |
+| Home | Photo caption | Register with your agent: Open your account in person or online, with a local agent beside you. | Join with your agent: Your agent registers you in person, or sends you a link to set up your account online. |
+| Home, Benefits | Saver app / phone benefit | Register, contribute, track your balance… | Contribute, track your balance… |
+| How it works | Step 1 | Register Online: Open your account through the Customer Portal in your browser… | Join Through an Agent: Your Vochus agent registers you in person, or sends you a link to open your account in your browser… |
+| FAQ | First question | How do I register with Vochus Easy Save? Visit vochuseasysave.com and click Create an Account… | How do I join Vochus Easy Save? You join through a registered Vochus agent… No agent yet? Contact us and we will connect you with one. |
+| Portal | Hero button; "New saver" step | Create an Account; "choose Create an Account, enter your phone number…" | Find an Agent; "your Vochus agent registers you, or sends you a link to set up your account. No agent yet? Find an agent." |
+| Plans | Per-plan buttons | Start saving daily / weekly / monthly · Join a group | Find an Agent |
+| Interest, Plans, How it works, Benefits | Call-to-action buttons | Start Earning Interest / Start Earning 12% Today | Find an Agent |
+| Contact | Form topic | Registration help | Find an agent |

@@ -9,7 +9,7 @@
   var $$ = function (s, c) { return Array.prototype.slice.call((c || d).querySelectorAll(s)); };
 
   /* App destinations, stamped by _tools/assemble.py from its APP constant; do not edit here. */
-  window.VOCHUS_APP = /* app-urls:start */{register:"https://easysave.vochusglobalservices.co.uk/customer/enroll",saver_login:"https://easysave.vochusglobalservices.co.uk/customer/login",saver_reset:"https://easysave.vochusglobalservices.co.uk/customer/forgot-password",agent_login:"https://easysave.vochusglobalservices.co.uk/",agent_reset:"https://easysave.vochusglobalservices.co.uk/forgot-password",apk_customer:"https://easysave.vochusglobalservices.co.uk/downloads/easysave-customer.apk",apk_agent:"https://easysave.vochusglobalservices.co.uk/downloads/easysave-agent.apk"}/* app-urls:end */;
+  window.VOCHUS_APP = /* app-urls:start */{saver_login:"https://easysave.vochusglobalservices.co.uk/customer/login",saver_reset:"https://easysave.vochusglobalservices.co.uk/customer/forgot-password",agent_login:"https://easysave.vochusglobalservices.co.uk/",agent_reset:"https://easysave.vochusglobalservices.co.uk/forgot-password",apk_customer:"https://easysave.vochusglobalservices.co.uk/downloads/easysave-customer.apk",apk_agent:"https://easysave.vochusglobalservices.co.uk/downloads/easysave-agent.apk"}/* app-urls:end */;
 
   /* ---- Nav: scrolled shadow ---- */
   var nav = $('#nav');
@@ -266,5 +266,12 @@
     if (q.form) q.form.addEventListener('submit', function (e) { e.preventDefault(); });
     q.addEventListener('input', run);
     q.addEventListener('keydown', function (e) { if (e.key === 'Escape') { q.value = ''; run(); } });
+  }
+  /* ---- "Find an Agent" links land on contact.html?topic=agent#form: preselect that topic ---- */
+  var topic = d.getElementById('ct-subject');
+  if (topic && /[?&]topic=agent\b/.test(location.search)) {
+    for (var ti = 0; ti < topic.options.length; ti++) {
+      if (topic.options[ti].text === 'Find an agent') { topic.selectedIndex = ti; break; }
+    }
   }
 })();

@@ -22,7 +22,7 @@ def main():
                     tag = re.search(r'<a[^>]*href="' + re.escape(u) + r'"[^>]*>', src)
                     if tag and 'target="_blank"' in tag.group(0) and "noopener" not in tag.group(0): print(f"NOOPENER {page}: {u}"); bad += 1
                     continue
-                file_part, _, frag = u.partition("#")
+                file_part, _, frag = u.partition("#"); file_part = file_part.split("?")[0]
                 if file_part:
                     target = os.path.normpath(os.path.join(os.path.dirname(path), file_part))
                     if not os.path.exists(target): print(f"MISSING FILE {page}: {u}"); bad += 1; continue
