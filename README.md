@@ -49,7 +49,7 @@ The nav, footer, `<head>` and icon sprite come from `_partials/`. Edit the parti
 python3 _tools/assemble.py
 ```
 
-`assemble.py` also writes `sitemap.xml`, the robots/noindex tags and the JSON-LD structured data, and holds the single list of app URLs (`APP_BASE`, register, log-in, reset, APK downloads) and the canonical site URL. Change them there, re-run it and commit the pages it rewrites.
+`assemble.py` also writes `sitemap.xml`, the robots/noindex tags and the JSON-LD structured data, and holds the single list of app URLs (`APP_BASE`, log-in, password reset, APK downloads; there is no sign-up link, as customers join through an agent) and the canonical site URL. Change them there, re-run it and commit the pages it rewrites.
 
 Page content is edited directly in each `.html` file. Client wording is kept verbatim; any change to it is listed in [`_docs/copy-for-approval.md`](_docs/copy-for-approval.md).
 
